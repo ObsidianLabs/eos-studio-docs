@@ -2,27 +2,35 @@
 Account System
 ===========================================
 
-Different from Bitcoin and Ethereum, on EOSIO-based blockchains
-an `account` is the basic unit to store tokens or acts as an individual 
-to interact with smart contracts. Each account can have a human readable
-name so it will be easy to remember.
-
-Account有绑定的permission keys (a private key and a public key)
-通过permission key来检查是否有权限操作该账户。
+For Bitcoin or Ethereum, `addresses` are the individuals 
+in blockchain transactions. For example, tokens are
+transfered from one address to another, and each address has
+its own token balance. 
+Different from them, EOSIO uses `accounts` as the basic unit 
+to store tokens and act as an individual on the blockchain.
 
 Account Name
 ===========================================
 
+An account can have a human readable name so it will be easy to remember.
 The account name is a string of max length 12 consists of 
 small letters a-z, digits 1-5 and dot.
 
-每一位有 ``26+5+1 = 32`` 种可能性，所以account name其实代表的是一个base32的字符。ads
-aa ``uint64_t`` 类型的整数。
+..
+  Each char has  ``26+5+1 = 32`` possibilities, 
+  so an account name is actually a ``base32`` string. 
+
+  Its value is a ``uint64_t`` interger
 
 Create an Account
 ===========================================
+
+Accounts need to be created by another account.
 
 Accounts are created, and it is not free.
 
 Permissions
 ===========================================
+
+An account has a few permission keys (a private key and a public key)
+Using permission key to sign a transaction issued by an account.

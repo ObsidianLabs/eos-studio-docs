@@ -28,18 +28,17 @@ If you are a developer, the following documentation will guide you to
   :caption: Introduction
 
   introduction
-  getting-started/web
-  getting-started/desktop
-
+  getting-started/index
+  eosio-fundamentals/index
+  advanced/index
+  
 .. toctree::
   :maxdepth: 2
-  :caption: EOSIO Fundamentals
+  :caption: Sample Smart Contracts
 
-  eosio-fundamentals/account
-  eosio-fundamentals/smart-contract
-  eosio-fundamentals/dapp
-  eosio-fundamentals/resource
-  eosio-fundamentals/advanced
+  contracts/eosio-token
+  contracts/elemental-battles
+  contracts/dgoods/index
 
 .. toctree::
   :maxdepth: 2
@@ -54,11 +53,9 @@ If you are a developer, the following documentation will guide you to
 
 .. toctree::
   :maxdepth: 2
-  :caption: Sample Contracts
+  :caption: Resources
 
-  contracts/eosio-token
-  contracts/elemental-battles
-  contracts/dgoods
+  eosio-cdt/index
 
 Indices and tables
 ==================

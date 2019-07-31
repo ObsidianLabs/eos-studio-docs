@@ -42,6 +42,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
+    'sphinx.ext.linkcode',
     'recommonmark'
 ]
 
@@ -79,6 +80,7 @@ pygments_style = None
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
+# html_theme = 'sphinxdoc'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -183,3 +185,38 @@ epub_exclude_files = ['search.html']
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+todo_emit_warnings = True
+
+
+def linkcode_resolve(domain, info):
+    if domain != 'cpp':
+        return None
+
+    if not info['names']:
+        return None
+
+    names = info['names'][0].split('::')
+    if names[0] == 'eosio':
+        return linkcode_resolve_eosio(names)
+    else:
+        return None
+
+def linkcode_resolve_eosio(names):
+    if (len(names) > 2):
+        return None
+    
+    github = "https://github.com/EOSIO/eosio.cdt/blob/v1.6.2/libraries"
+    print names
+
+    if names[1] == 'name':
+        return "%s/eosiolib/core/eosio/name.hpp#L35" % github
+    elif names[1] == 'symbol_code':
+        return "%s/eosiolib/core/eosio/symbol.hpp#L29" % github
+    elif names[1] == 'symbol':
+        return "%s/eosiolib/core/eosio/symbol.hpp#L239" % github
+    elif names[1] == 'extended_symbol':
+        return "%s/eosiolib/core/eosio/symbol.hpp#L377" % github
+    elif names[1] == 'asset':
+        return "%s/eosiolib/core/eosio/asset.hpp#L23" % github
+    else:
+        return None

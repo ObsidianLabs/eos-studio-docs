@@ -1,5 +1,5 @@
 ===========================================
-dApp Development
+Decentralized Application
 ===========================================
 
 EOSIO blockchain use account system to 

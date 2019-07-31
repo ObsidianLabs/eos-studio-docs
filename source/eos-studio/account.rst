@@ -12,12 +12,14 @@ and display it in the page below.
 
 
 The Contract and Account pages share
-the same starred account list. 你也可以用加星来标记常用的account.
+the same starred account list.
+You can also use the star to mark the commonly used account.
 
 Basic Information
 ===========================================
 
-显示用户基本信息，包括token余额，resources (CPU/NET/RAM), 和permission keys.
+Display basic user information, including token balance, 
+resources (CPU/NET/RAM), and permission keys.
 
 When you are using a local network and the balance is always zero even
 though you have issued or transfered some tokens to the account, that is
@@ -48,8 +50,8 @@ private keys.
 Tools
 ===========================================
 
-EOS Studio为一些常用的账户操作提供了便捷工具。这些工具可以通过address bar右边的
-按钮来访问。
+EOS Studio provides a handy tool for some common account operations. 
+These tools can be passed to the right of the address bar button to access.
 
 - **Transfer**: make a transfer of the core symbol tokens.
 

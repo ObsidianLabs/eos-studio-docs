@@ -2,12 +2,14 @@
 Network Manager
 ===========================================
 
-Network用来切换连接的EOSIO网络。
+Network are use to switch connected EOSIO network.
 
 Local Network
 ===========================================
 
 (Only for EOS Studio Desktop)
+
+.. image:: network_manager.png
 
 .. _feature-network-eosio-manager:
 

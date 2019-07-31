@@ -7,6 +7,8 @@ EOSIO dApp development. By integrating various tools required for EOSIO in
 a unified application, EOS Studio provides a powerful and easy-to-use 
 environment to build dApps.
 
+.. image:: main.png
+
 EOS Studio comes with two versions:
 
 - :ref:`EOS Studio Desktop <getting-started-desktop>`: available on 

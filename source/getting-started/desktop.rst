@@ -1,7 +1,7 @@
 .. _getting-started-desktop:
 
 ===========================================
-Getting Started - EOS Studio Desktop
+EOS Studio Desktop
 ===========================================
 
 EOS Studio Desktop is a stand-alone desktop appliction, 
@@ -39,7 +39,8 @@ That includes:
   a binary format EOSIO uses to run smart contracts.
 
 EOS Studio Desktop uses `Docker <https://www.docker.com>`_ to install and 
-run the above tools. With dockerized EOSIO and EOSIO.CDT, 可以提供xxx等好处。
+run the above tools. With dockerized EOSIO and EOSIO.CDT, it's easier to work
+accross differenct operating systems.
 If you don't have Docker yet, the welcome page will guide you 
 to install it.
 

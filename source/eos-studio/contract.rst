@@ -2,13 +2,28 @@
 Contract Inspector
 ===========================================
 
-The Contract Page provides the necessary tools to inspect and debug 
-smart contracts. 为了方便同时查看多个合约，EOS Studio 使用了tabs的方式来
-支持打开多个合约。你可以点击tab来快速切换想要查看的合约。
-同时，可以将常用的合约Account加星。
+.. image:: contract/contract_inspector.png
 
-Just below the tabs, there is an address bar where 让你来输入合约账户名。
-EOS Studio会根据你输入的合约账户，自动读取abi file in the account来检查合约。
+The Contract Page provides the necessary tools to inspect and debug
+smart contracts. In order to view multiple contracts at the same time, 
+EOS Studio uses tabs to support for opening multiple contracts. 
+You can click on the tab to quickly switch the contract you want to view.
+At the same time, the commonly used contract Account can be starred.
+
+Just below the tabs, there is an address bar where lets you enter 
+the contract account name.
+EOS Studio will automatically read the abi file in the account
+to check the contract based on the contract account you entered.
+
+The EOS Studio contract inspector has two parts: 
+
+  1) a panel to execute actions on the left, and
+  2) a panel to query table data on the right.
+  
+In the dropdown menus at the top left for each panel, 
+you can easily view all the actions and all the tables 
+respectively.
+
 
 If a smart contract is found in the account, EOS Studio will parse 
 the abi file to visualize its actions and tables.
@@ -16,7 +31,8 @@ the abi file to visualize its actions and tables.
 Actions
 ===========================================
 
-Actions显示在右边。可以通过dropdown menu来切换想调用的action.
+Actions are shown on the right. 
+You can switch the action you want to call through the dropdown menu.
 
 -------------------------------------------
 Form for Input Parameter
@@ -25,7 +41,9 @@ Form for Input Parameter
 A form for inputs will be generated from the abi to make
 it easier to enter parameters.
 
-action的input包含许多类型，EOS Studio会根据类型来处理输入的参数:
+The input of the action contains many types, and EOS Studio will process
+the input parameters according to the type:
+
 
 - For type of ``uint64_t``, ``uint32_t``, 
 - For type of ``permission``, 
@@ -40,11 +58,12 @@ It will show you both the ``cleos`` command and the ``eosjs`` script.
 Authorization
 -------------------------------------------
 
-在这里可以change ``actor`` and ``permission`` to sign the transaction. By default,
+You can change the ``actor`` and ``permission`` used to sign the transaction. 
+By default,
 EOS Studio will use ``{account}@active`` which ``account`` is the
 current selected account.
 
-EOS Studio暂时不支持multisig.
+EOS Studio doesn't support multisig yet.
 
 -------------------------------------------
 Ricardian
@@ -54,19 +73,42 @@ Ricardian
 Result
 -------------------------------------------
 
-调用合约后的结果将显示在这里。如果成果了，会看到transaction hash,
-点击可以看到完整的transaction details. 如果交易失败了，可以看到
-error message.
+The result after calling the contract will be displayed here.
+If the result is, you will see the transaction hash,
+click to see the complete transaction details. 
+
+.. image:: contract/transaction_details.png
+
+If the transaction fails, you can see
+the error message.
 
 -------------------------------------------
 Execution History and Bookmarks
 -------------------------------------------
 
-调用合约的记录（包括参数和结果）会被保存在history中，方便之后查询。
-另外，you can add common used parameters to `bookmarks`.
+When we are debugging a smart contract, we often need to call 
+the same actions repeatedly, and constantly refresh the table 
+to view the most recent data. Most HTTP API clients will store 
+call history and have bookmarks to save common-used parameters. 
+EOS Studio has these features too. Within the clock icon buttons 
+on the top right for each panel, you can see the histories for 
+action executions and table queries. They would be convenient 
+if you need to check past execution results, or simply want to 
+re-run with the same previous parameters.
+
+EOS Studio can also save frequently used parameters to bookmarks. 
+For example, if I want to issue 10 EOS to myself repeatedly, I can 
+save it so I don’t need to enter them again. Go to the heart icon 
+and select add to bookmarks, you will see the contract action, the 
+authorizer, and parameters to execution with. Just enter a name and 
+save it, and you can access it in bookmarks anytime in the future.
+
+The record of the calling contract (including parameters and results) 
+will be saved in the history for easy query.
+In addition, you can add common used parameters to `bookmarks`.
 
 Tables
 ===========================================
 
-Tables显示在右边。可以通过dropdown menu来切换想查看的table.
-
+Tables are shown on the right. You can switch the table you want 
+to view through the dropdown menu.

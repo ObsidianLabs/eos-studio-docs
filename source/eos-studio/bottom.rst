@@ -5,7 +5,7 @@ Bottom Bar
 Keypair Manager
 ===========================================
 
-Keypair Manager用来管理你的Keypairs.
+Keypair Manager used to manage keypairs.
 
 
 Scatter

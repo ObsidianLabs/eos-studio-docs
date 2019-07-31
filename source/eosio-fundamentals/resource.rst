@@ -15,24 +15,31 @@ designed models to distribute them and ...
 CPU
 ===========================================
 
-账户在调用任何合约时，都会计算，消耗CPU。需要抵押一定量的EOS来换取CPU使用权。
-网络将根据所有账户抵押的CPU总量，按比例分配每个账户可以使用的CPU time。这个时间
-代表24 hours内可以使用的CPU总时长。一个账户需要使用的CPU越多，就需要
 
-抵押的EOS可以refund，但是需要等待72 hours.
+When an account calls any contract, it is calculated and consumes CPU. 
+A certain amount of EOS needs to be mortgaged in exchange for CPU usage rights.
+The network will prorate the CPU time that each account can use based 
+on the total amount of CPUs collateralized on all accounts.  This time
+Represents the total CPU length that can be used in 24 hours. 
+The more CPUs an account needs to use, the more it needs to
+
+Delegated EOS can be refunded. It takes 72 hours.
 
 NET
 ===========================================
 
-NET的distribution机制和CPU一样，也是通过抵押的方式，
-来分配network bandwidth的使用权。
+NET's distribution mechanism is the same as the CPU, 
+but also through the mortgage method.
+To allocate the use of network bandwidth.
 
 RAM
 ===========================================
 
-链上的存储空间总量是有限的，所以存储数据需要购买RAM。
-RAM需要购买，并且通过bancor算法来自动调节价格。
-买的人越多，RAM价格越高，and vice versa.
+The total amount of storage space on the chain is limited, 
+so storing data requires buying RAM.
+RAM needs to be purchased and the price is automatically adjusted 
+by the bancor algorithm.
+The more people you buy, the higher the RAM price, and vice versa.
 
 REX
 ===========================================
