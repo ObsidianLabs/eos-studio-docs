@@ -61,6 +61,7 @@ as well as providing a with examples.
   contracts/eosio-token
   contracts/elemental-battles
   contracts/dgoods/index
+  contracts/eosio-forum/index
 
 .. toctree::
   :maxdepth: 2
