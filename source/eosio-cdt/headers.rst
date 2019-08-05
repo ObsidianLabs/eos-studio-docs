@@ -135,3 +135,77 @@ name.hpp
   .. cpp:var:: private uint64_t value
 
     Stores the name as a ``uint64_t`` value
+
+
+
+time.hpp
+===========================================
+
+.. code-block:: cpp
+
+  #include <eosio/time.hpp>
+
+.. cpp:class:: eosio::microseconds
+
+  Microseconds. 
+
+  .. cpp:function:: microseconds(int64_t count = 0)
+  .. cpp:function:: static microseconds maximum()
+  
+    Maximum ``0x7fffffffffffffffll``
+
+  .. cpp:function:: int64_t count()
+  .. cpp:function:: int64_t to_seconds()
+
+  .. cpp:var:: int64_t _count
+
+    The value used in serilization
+
+.. cpp:function:: inline microseconds eosio::milliseconds( int64_t ms )
+.. cpp:function:: inline microseconds eosio::seconds( int64_t s )
+.. cpp:function:: inline microseconds eosio::minutes( int64_t m )
+.. cpp:function:: inline microseconds eosio::hours( int64_t h )
+.. cpp:function:: inline microseconds eosio::days( int64_t d )
+
+
+.. cpp:class:: eosio::time_point
+
+  High resolution time point in microseconds. 
+
+  .. cpp:function:: time_point(microseconds elapsed = microseconds())
+
+
+  .. cpp:function:: microseconds& time_since_epoch()
+  .. cpp:function:: uint32_t sec_since_epoch()
+
+  .. cpp:var:: microseconds elapsed
+    
+    The value used in serilization
+
+
+
+.. cpp:class:: eosio::time_point_sec
+
+  A lower resolution time_point accurate only to seconds from 1970. 
+
+  .. cpp:function:: time_point_sec()
+  .. cpp:function:: explicit time_point_sec(uint32_t seconds)
+  .. cpp:function:: time_point_sec( const time_point& t )
+
+  .. cpp:function:: time_point_sec maximum()
+
+    Maximum ``time_point_sec(0xffffffff)``
+
+  .. cpp:function:: time_point_sec min()
+
+    Minimum ``time_point_sec(0)``
+
+  .. cpp:function:: uint32_t sec_since_epoch()
+
+    Return ``this.utc_seconds``
+
+  .. cpp:var:: uint32_t utc_seconds
+
+    The value used in serilization
+
+.. cpp:class:: eosio::block_timestamp

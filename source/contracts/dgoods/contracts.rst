@@ -17,7 +17,7 @@ Actions
 setconfig
 -------------------------------------------
 
-.. cpp:function:: ACTION dgoods::setconfig(const eosio::symbol_code &sym, string version)
+.. cpp:function:: ACTION dgoods::setconfig(eosio::symbol_code sym, string version)
 
 Adds the symbol and version of dgoods spec.
 It also initializes the ``category_name_id`` to zero.
@@ -27,7 +27,7 @@ but the symbol will not update.
 create
 -------------------------------------------
 
-.. cpp:function:: ACTION dgoods::create(const eosio::name &issuer, const eosio::name &category, const eosio::name &token_name, bool fungible, bool burnable, bool transferable, string base_uri, string max_supply)
+.. cpp:function:: ACTION dgoods::create(eosio::name issuer, eosio::name category, eosio::name token_name, bool fungible, bool burnable, bool transferable, string base_uri, string max_supply)
 
 Instantiates a token. This is required before any tokens can be issued 
 and sets properties such as the category, name, maximum supply, rev split,
@@ -40,7 +40,7 @@ The symbol in the asset must match the symbol in ``setconfig``.
 issue
 -------------------------------------------
 
-.. cpp:function:: ACTION dgoods::issue(const eosio::name &to, const eosio::name &category, const eosio::name &token_name, string quantity, string relative_uri, string memo)
+.. cpp:function:: ACTION dgoods::issue(eosio::name to, eosio::name category, eosio::name token_name, string quantity, string relative_uri, string memo)
 
 Mints a token and gives ownership to the ``to`` account name. 
 For a valid call the ``category``, and ``token_name`` must have 
@@ -52,7 +52,7 @@ otherwise quantity must match precision of ``max_supply``.
 transferft
 -------------------------------------------
 
-.. cpp:function:: ACTION dgoods::transferft(const eosio::name &from, const eosio::name &to, const eosio::name &category, const eosio::name &token_name, eosio::asset quantity, string memo)
+.. cpp:function:: ACTION dgoods::transferft(eosio::name from, eosio::name to, eosio::name category, eosio::name token_name, eosio::asset quantity, string memo)
 
 Transfer fungible tokens ``category:token_name``.
 

@@ -8,7 +8,7 @@ eosio.forum
 
   A brief introduction of eosio.forum
 
-The purpose of this contract is to support the EOS Referendum system 
+The purpose of ``eosio.forum`` is to support the EOS Referendum system 
 by storing proposals and their related votes in-RAM in the blockchain's 
 state.
 
@@ -23,5 +23,5 @@ and report on the outputs of the post and status actions.
   :hidden:
 
   quickstart
-  standard
+  referendum
   contracts

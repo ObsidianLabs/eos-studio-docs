@@ -30,7 +30,7 @@ Actions
 create
 --------------------
 
-.. cpp:function:: ACTION token::create(const eosio::name &issuer, const eosio::asset &maximum_supply)
+.. cpp:function:: ACTION token::create(eosio::name issuer, eosio::asset maximum_supply)
 
 Create a token in supply of ``maximum_supply`` with an ``issuer`` account.
 If successful, a new entry in :ref:`stats <tutorials-token-table-stats>`
@@ -41,7 +41,7 @@ Transaction must be signed by the contract account itself.
 issue
 -------------------------------------------
 
-.. cpp:function:: ACTION token::issue(const eosio::name &to, const eosio::asset &quantity, const string &memo)
+.. cpp:function:: ACTION token::issue(eosio::name to, eosio::asset quantity, string memo)
 
 Issue ``quantity`` of tokens to account ``to``
 with an optional ``memo`` that accompanies the token issue transaction. 
@@ -52,7 +52,7 @@ Transaction must be signed by the ``issuer``.
 transfer
 -------------------------------------------
 
-.. cpp:function:: ACTION token::transfer(const eosio::name &from, const eosio::name &to, const eosio::asset &quantity, const string &memo)
+.. cpp:function:: ACTION token::transfer(eosio::name from, eosio::name to, eosio::asset quantity, string memo)
 
 Transfer ``quantity`` of tokens from account ``from`` to account ``to``,
 with an optional ``memo`` that accompanies the transfer transaction. 
@@ -64,7 +64,7 @@ Transaction must be signed by account ``from``.
 open
 -------------------------------------------
 
-.. cpp:function:: ACTION token::open(const eosio::name &owner, const eosio::symbol &symbol, const eosio::name &ram_payer)
+.. cpp:function:: ACTION token::open(eosio::name owner, eosio::symbol symbol, eosio::name ram_payer)
 
 Allows ``ram_payer`` to create an account ``owner`` with zero balance for
 token ``symbol`` at the expense of ``ram_payer``.
@@ -74,7 +74,7 @@ Transaction must be signed by account ``ram_payer``.
 close
 -------------------------------------------
 
-.. cpp:function:: ACTION token::close(const eosio::name &owner, const eosio::symbol &symbol)
+.. cpp:function:: ACTION token::close(eosio::name owner, eosio::symbol symbol)
 
 This action is the opposite for :ref:`open <tutorials-token-action-open>`, 
 it closes the account ``owner`` for token ``symbol``.
@@ -83,7 +83,7 @@ it closes the account ``owner`` for token ``symbol``.
 retire
 -------------------------------------------
 
-.. cpp:function:: ACTION token::retire(const eosio::asset &quantity, const string &memo)
+.. cpp:function:: ACTION token::retire(eosio::asset quantity, string memo)
 
 The opposite for :ref:`create <tutorials-token-action-create>` action.
 If all validations succeed, it debits the statstable.supply amount.

@@ -1,0 +1,6 @@
+@import 'theme.css';
+
+.rst-content dl:not(.docutils) dt .reference.internal {
+  margin-right: 4px;
+  text-decoration: underline;
+}

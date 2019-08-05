@@ -93,6 +93,10 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_css_files = [
+  'css/custom.css',
+]
+
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
 #
@@ -218,5 +222,23 @@ def linkcode_resolve_eosio(names):
         return "%s/eosiolib/core/eosio/symbol.hpp#L377" % github
     elif names[1] == 'asset':
         return "%s/eosiolib/core/eosio/asset.hpp#L23" % github
+    elif names[1] == 'microseconds':
+        return "%s/eosiolib/core/eosio/time.hpp#L15" % github
+    elif names[1] == 'milliseconds':
+        return "%s/eosiolib/core/eosio/time.hpp#L44" % github
+    elif names[1] == 'seconds':
+        return "%s/eosiolib/core/eosio/time.hpp#L43" % github
+    elif names[1] == 'minutes':
+        return "%s/eosiolib/core/eosio/time.hpp#L45" % github
+    elif names[1] == 'hours':
+        return "%s/eosiolib/core/eosio/time.hpp#L46" % github
+    elif names[1] == 'days':
+        return "%s/eosiolib/core/eosio/time.hpp#L47" % github
+    elif names[1] == 'time_point':
+        return "%s/eosiolib/core/eosio/time.hpp#L54" % github
+    elif names[1] == 'time_point_sec':
+        return "%s/eosiolib/core/eosio/time.hpp#L84" % github
+    elif names[1] == 'block_timestamp':
+        return "%s/eosiolib/core/eosio/time.hpp#L141" % github
     else:
         return None
