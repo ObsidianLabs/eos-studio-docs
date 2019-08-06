@@ -29,9 +29,9 @@ To address this, the dGoods standard implements a `hierarchical
 naming structure`, which has one token symbol per contract
 but allows the creation of many sub-tokens. 
 
-.. todo::
-
-  A diagram to demonstrate the ``symbol`` -> ``category`` -> ``name`` structure.
+.. image:: dgoods-structure.png
+  :width: 60%
+  :align: center
 
 Each sub-token can be 
 assigned a category, a token name, and tags which will allow wallets, 
@@ -116,6 +116,11 @@ development community a flexible toolset to work with.
 .. todo::
 
   some examples for templates
+
+Decentralized Exchange
+-------------------------------------------
+
+One of the biggest features of dgoods is the built in exchange.
 
 Open Source
 -------------------------------------------

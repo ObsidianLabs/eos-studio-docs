@@ -1,4 +1,4 @@
-Smart Contract
+Smart Contract (assets)
 ===========================================
 
 .. note::
@@ -9,6 +9,124 @@ Smart Contract
 In the following sections we describe the minimum set of required 
 methods and functionality for implementing this specification, along with 
 the table structure, and finally some example metadata templates.
+
+
+-------------------------------------------
+Tables
+-------------------------------------------
+
+tokenconfigs
+-------------------------------------------
+
+The first table created and must be initialized 
+with ``setconfig`` before any tokens can be created.
+
+This is a singleton which holds the some basic information for the contract, including
+
+- ``symbol`` for the contract;
+- ``standard`` and ``version`` that let wallets know what they need to support for this contract;
+- ``category_name_id`` which is like a global id for ``category:token_name`` pairs.
+  The value will increment by one every time a new type of token is created by ``create`` action.
+
+.. code-block:: cpp
+
+  // scope is self
+  TABLE tokenconfigs {
+    eosio::symbol_code symbol;
+    eosio::name standard;
+    string version;
+    uint64_t category_name_id;
+  };
+
+
+dgoodstats
+-------------------------------------------
+
+Stores token info such as whether it is fungible, burnable, or transferrable, 
+and what the current and max supplies are. Info is written when a token 
+is created.
+
+The ``category`` is used as table ``scope`` and ``token_name``
+is the primary key, so it ensures each ``category:token_name`` pair is
+unique.
+
+.. code-block:: cpp
+
+  // scope is category, then token_name is unique
+  TABLE dgoodstats {
+    bool fungible;
+    bool burnable;
+    bool sellable;
+    bool transferable;
+    eosio::name issuer;
+    eosio::name rev_partner;
+    eosio::name token_name;
+    uint64_t category_name_id;
+    eosio::asset max_supply;
+    eosio::asset current_supply;
+    eosio::asset issued_supply; // keep track of unique id’s when tokens are burned as this never decreases
+    double rev_split;
+    string base_uri;
+
+    uint64_t primary_key() const { return token_name.value; }
+  };
+
+
+categoryinfo
+-------------------------------------------
+
+Holds all category names for easy querying.
+
+.. code-block:: cpp
+
+  // scope is self
+  TABLE categoryinfo {
+    eosio::name category;
+
+    uint64_t primary_key() const { return category.value; }
+  };
+
+
+dgood
+-------------------------------------------
+
+The global list for non or semi-fungible tokens.
+Secondary indices are used to search by ``owner``.
+
+.. code-block:: cpp
+
+  // scope is self
+  TABLE dgood {
+    uint64_t id;
+    uint64_t serial_number;
+    eosio::name owner;
+    eosio::name category;
+    eosio::name token_name;
+    std::optional<string> relative_uri;
+
+    uint64_t primary_key() const { return id; }
+    uint64_t get_owner() const { return owner.value; }
+  };
+
+
+accounts
+-------------------------------------------
+
+Holds account information, including balances for fungible tokens  
+and numbers of NFTs that account owns of a given type.
+
+.. code-block:: cpp
+
+  // scope is owner
+  TABLE accounts {
+    uint64_t category_name_id;
+    eosio::name category;
+    eosio::name token_name;
+    eosio::asset amount;
+
+    uint64_t primary_key() const { return category_name_id; }
+  };
+
 
 -------------------------------------------
 Actions
@@ -64,150 +182,23 @@ transfernft
 Transfer non-fungible tokens.
 
 
--------------------------------------------
-Tables
--------------------------------------------
-
-Token Config Table
+burnft
 -------------------------------------------
 
-Singleton which holds the symbol for the contract, version, 
-type of standard, and ``category_name_id``, which is like a global 
-id for category and token name pairs. This is the first table 
-created and must be defined with ``setconfig`` before any tokens 
-can be created. As part of a "standard among standards" the 
-token configs table will have a version and standard field that 
-lets wallets know what they will need to support from this contract.
+.. cpp:function:: ACTION dgoods::transferft(eosio::name owner, uint64_t category_name_id, asset quantity)
 
-.. code-block:: cpp
+Destroys fungible tokens and frees the RAM if all are deleted from an account. 
+``quantity`` must match precision of ``max_supply``. Only owner may call Burn function 
+and burnable must be true.
 
-  // scope is self
-  TABLE tokenconfigs {
-    eosio::name standard;
-    string version;
-    eosio::symbol_code symbol;
-    uint64_t category_name_id;
-  };
-
-
-dGood Stats Table
+burnnft
 -------------------------------------------
 
-Ensures there can be only one ``category:token_name`` pair. 
-Stores whether a given token is fungible, burnable, or transferrable 
-and what the current and max supplies are. Info is written when a token 
-is created. Issued supply is needed to keep track of unique id's when 
-tokens are burned as issued supply never decreases.
+.. cpp:function:: ACTION dgoods::transfernft(eosio::name owner, vector<uint64_t> dgood_ids)
 
+Destroys specified tokens and frees the RAM. Only owner may call burn function, 
+burnable must be true, and token must not be locked.
 
-.. code-block:: cpp
-
-  // scope is category, then token_name is unique
-  TABLE dgoodstats {
-    bool fungible;
-    bool burnable;
-    bool sellable;
-    bool transferable;
-    eosio::name issuer;
-    eosio::name rev_partner;
-    eosio::name token_name;
-    uint64_t category_name_id;
-    eosio::asset max_supply;
-    eosio::asset current_supply;
-    eosio::asset issued_supply;
-    double rev_split;
-    string base_uri;
-
-    uint64_t primary_key() const { return token_name.value; }
-  };
-
-
-dGood Table
--------------------------------------------
-
-This is the global list of non or semi-fungible tokens. Secondary 
-indices provide search by ``owner``.
-
-.. code-block:: cpp
-
-  // scope is self
-  TABLE dgood {
-    uint64_t id;
-    uint64_t serial_number;
-    eosio::name owner;
-    eosio::name category;
-    eosio::name token_name;
-    std::optional<string> relative_uri;
-
-    uint64_t primary_key() const { return id; }
-    uint64_t get_owner() const { return owner.value; }
-  };
-
-
-Category Table
--------------------------------------------
-
-Holds all category names for easy querying.
-
-.. code-block:: cpp
-
-  // scope is self
-  TABLE categoryinfo {
-    eosio::name category;
-
-    uint64_t primary_key() const { return category.value; }
-  };
-
-Asks Table
--------------------------------------------
-
-Holds listings for sale in the built in decentralized exchange (DEX)
-
-.. code-block:: cpp
-
-  // scope is self
-  TABLE asks {
-    uint64_t batch_id;
-    vector<uint64_t> dgood_ids;
-    eosio::name seller;
-    eosio::asset amount;
-    time_point_sec expiration;
-
-    uint64_t primary_key() const { return batch_id; }
-    uint64_t get_seller() const { return seller.value; }
-  };
-
-Locked NFT Table
--------------------------------------------
-
-Table corresponding to tokens that are locked and temporarily not transferable
-
-.. code-block:: cpp
-
-  // scope is self
-  TABLE lockednfts {
-    uint64_t dgood_id;
-
-    uint64_t primary_key() const { return dgood_id; }
-  };
-
-Account Table
--------------------------------------------
-
-The Account table holds the fungible tokens for an account, 
-and a reference to how many NFTs that account owns of a given type.
-
-.. code-block:: cpp
-
-  // scope is owner
-  TABLE accounts {
-    uint64_t category_name_id;
-    eosio::name category;
-    eosio::name token_name;
-    eosio::asset amount;
-
-    uint64_t primary_key() const { return category_name_id; }
-  };
 
 -------------------------------------------
 Metadata Templates

@@ -44,3 +44,4 @@ token standards
   quickstart
   standard
   contracts
+  exchange

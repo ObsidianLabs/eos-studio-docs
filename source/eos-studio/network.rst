@@ -36,7 +36,7 @@ see a list of configurations, and please check ``nodeos`` documentation
 to understand how to use them.
 
 -------------------------------------------
-Logs for Block Production
+Logs of Block Production
 -------------------------------------------
 
 You can toggle the button and hide ...
