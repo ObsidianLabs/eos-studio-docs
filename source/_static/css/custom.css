@@ -1,6 +1,68 @@
 @import 'theme.css';
 
+.rst-content a:not(.headerlink):hover {
+  text-decoration: underline;
+}
+.rst-content a:not(.headerlink):visited {
+  color: #2980B9;
+}
+
+.rst-content dl:not(.docutils) dl,
+.rst-content dl dl {
+  margin-top: 32px;
+  margin-bottom: 0;
+}
+.rst-content dl dl:first-child {
+  margin-top: 12px;
+}
+.rst-content dl ul li p {
+  margin-bottom: 0 !important;
+}
+.rst-content dl:not(.docutils) dl dt {
+  /* border-left-color: #6ab0de; */
+  /* background: #e7f2fa; */
+  font-weight: bold;
+  color: #888;
+  font-size: 75%;
+  font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace;
+  padding-left: 35px;
+  text-indent: -29px;
+}
 .rst-content dl:not(.docutils) dt .reference.internal {
-  margin-right: 4px;
+  color: #2980B9;
+  margin-right: 8px;
+  text-decoration: underline;
+}
+.rst-content dl:not(.docutils) dl dt em {
+  /* font-weight: bolder; */
+  font-style: normal;
+  color: #000;
+}
+.rst-content dl:not(.docutils) .property {
+  display: inline;
+  font-style: italic;
+}
+.rst-content dl:not(.docutils) dl dt .reference.internal {
+  color: #888;
+  margin-right: 8px;
+  text-decoration: underline;
+}
+.rst-content dl:not(.docutils) dl dt .reference.internal:hover {
+  color: #2980B9;
+}
+.rst-content dl dl dt .headerlink {
+  display: inline;
+  position: relative;
+  top: 1px;
+}
+
+.rst-content code.literal {
+  /* color: #dc9201; */
+}
+
+.rst-content code.xref {
+  color: #2980B9;
+}
+.rst-content code.xref:hover {
   text-decoration: underline;
 }

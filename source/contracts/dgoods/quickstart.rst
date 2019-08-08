@@ -65,11 +65,11 @@ Create
 The dGoods contract use a two level structure ``category:token_name`` to classify its assets.
 For example, if we want to create *sword* items for our game, we can use ``category=weapons`` 
 and ``token_name=sword``. Each sword is unique because they have different attributes, 
-and this type of asset is called *non-fungible token (NFT)*.
+and this type of :cpp:class:`eosio::asset` is called *non-fungible token (NFT)*.
 
 .. Now that we have set the tokenconfig data, we are free to create and issue tokens.
 
-Execute the ``create`` action
+Execute the :cpp:func:`dgoods::create` action
 
 .. code-block:: js
 
@@ -79,23 +79,19 @@ Execute the ``create`` action
   category: "weapons"
   token_name: "sword"
   fungible: false
-  burnable: true // can be burned or destroyed
-  sellable: false // cannot be sold
+  burnable: true // can be burned (destroyed)
+  sellable: true // can be sold in the built-in DEX
   transferable: true // can be transfered
-  rev_split: 0
-  base_uri: "https://botw.game/weapons/sword/"
+  rev_split: 0.05
+  base_uri: "https://dgoods.eosstudio.io/quickstart/weapons/sword/"
   max_supply: "10000 SWORD"
 
-Here we created a type of asset with a max supply of 10000 swords.
+Here we created the asset type ``weapons:sword`` with max supply of 10000.
+The ``base_uri`` will be used later to provide meta data for each sword.
+Properties ``rev_partner`` and ``rev_split`` are used when the asset is sold in the 
+built-in :ref:`decentralized exchange <dgoods-standard-dex>`.
 
-- The ``base_uri`` will together with ``relative_uri`` in each item to provide extra information,
-  preferably one of the predefined templates.
-- If the asset is ``sellable``, ``rev_partner`` and ``rev_split`` are used together to distribute
-  the income from selling the asset.
-  The ``rev_partner`` (in this case specified to the contract itself) 
-  will get ``rev_split`` of the sold amount with the seller getting the remainings.
-
-We will use the ``create`` action again to define an in-game currency.
+We will use the :cpp:func:`dgoods::create` action again to define an in-game currency.
 
 .. code-block:: js
 
@@ -109,7 +105,7 @@ We will use the ``create`` action again to define an in-game currency.
   sellable: false
   transferable: true
   rev_split: 0
-  base_uri: "https://botw.game/currencies/gold/"
+  base_uri: "https://dgoods.eosstudio.io/quickstart/currencies/gold/"
   max_supply: "1000000000.0000 GOLD"
 
 This type of asset is called *fungible tokens*, which means each unit (each ``GOLD``) is identical.
@@ -126,7 +122,7 @@ for sale through the marketplace. The other option is to issue directly to consu
 who bought a ticket through a normal payment processor.
 Either way issuing is done as follows:
 
-``issue`` an NFT
+:cpp:func:`dgoods::issue` an NFT
 
 .. code-block:: js
 
@@ -138,12 +134,30 @@ Either way issuing is done as follows:
   relative_uri: "master_sword.json"
   memo: "You justed picked the Master Sword!"
 
-.. todo::
+The ``relative_uri`` together with ``base_uri`` will provide extra information 
+for the item. It should be one of the :ref:`templates <dgoods-contract-templates>`.
 
-  Explain how ``https://botw.game/weapons/sword/master_sword.json`` is used.
-  Make sure it returns a json response.
+If we wanted to use ipfs to store the metadata we should issue one token at a 
+time and put the ipfs hash in relative_uri and the metadata for this token would be 
+``base_uri`` + ``relative_uri``
 
-Or ``issue`` some fungible tokens
+.. code-block:: js
+  :caption: Response of https://dgoods.eosstudio.io/quickstart/weapons/sword/master_sword.json 
+
+  {
+    "type": "2dgameAsset",
+    "name": "Master Sword",
+    "description": "Master Sword is",
+    "imageSmall": "https://dgoods.eosstudio.io/quickstart/weapons/sword/pic/master_sword_sm.jpg", // 150 x 150
+    "imageLarge": "https://dgoods.eosstudio.io/quickstart/weapons/sword/pic/master_sword_lg.jpg", // 1024 x 1024
+    "details": {
+      "attack": 30
+    },
+    "authenticityImage": ""
+  }
+
+
+To :cpp:func:`dgoods::issue` some fungible tokens
 
 .. code-block:: js
 
@@ -155,14 +169,6 @@ Or ``issue`` some fungible tokens
   relative_uri: "" // is this required?
   memo: "Take this to start your advanture."
 
-.. todo::
-
-  How to lock in specific attributes for each asset?
-
-If we wanted to use ipfs to store the metadata we should issue one token at a 
-time and put the ipfs hash in relative_uri and the metadata for this token would be 
-``base_uri`` + ``relative_uri``
-
 Let's explore what this data looks like on chain so far:
 
 .. todo::
@@ -173,7 +179,7 @@ Let's explore what this data looks like on chain so far:
 Transfer
 -------------------------------------------
 
-The owner of NFTs can transfer it to another account using ``transfernft`` action
+The owner of NFTs can transfer it to another account using :cpp:func:`dgoods::transfernft` action
 and specifying the tokens to transfer by their ``dgood_id``.
 
 .. code-block:: js
@@ -184,7 +190,7 @@ and specifying the tokens to transfer by their ``dgood_id``.
   dgood_ids: [0, 1]
   memo: "Take the weapons and fight together with me."
 
-To transfer some fungible tokens
+To transfer some fungible tokens, using :cpp:func:`dgoods::transferft`
 
 .. code-block:: js
 
@@ -201,16 +207,15 @@ To transfer some fungible tokens
 Burn
 -------------------------------------------
 
-Burn an NFT
+Burn an NFT using :cpp:func:`dgoods::burnnft`
 
 .. code-block:: js
 
-  // Execute action *burnnft* with parameters
   owner: "zelda"
   dgood_ids: [0]
   memo: "xxx xxx"
 
-Burn fungible tokens
+Burn fungible tokens using :cpp:func:`dgoods::burnft`
 
 .. code-block:: js
 
@@ -219,11 +224,6 @@ Burn fungible tokens
   category_name_id: "xxx" // how to find it?
   memo: "xxx xxx"
 
-
-View digital assets in wallets
-===========================================
-
-- View the digital asset in EOS wallets (e.g. TokenPocket).
 
 .. note::
 

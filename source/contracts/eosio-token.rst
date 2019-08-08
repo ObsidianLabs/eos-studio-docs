@@ -25,68 +25,49 @@ Smart Contract
 Actions
 --------------------
 
-.. _tutorials-token-action-create:
+.. cpp:class:: token
 
-create
---------------------
+  .. cpp:function:: ACTION create(eosio::name issuer, eosio::asset maximum_supply)
 
-.. cpp:function:: ACTION token::create(eosio::name issuer, eosio::asset maximum_supply)
-
-Create a token in supply of ``maximum_supply`` with an ``issuer`` account.
-If successful, a new entry in :ref:`stats <tutorials-token-table-stats>`
-table for token symbol scope will be created. 
-Transaction must be signed by the contract account itself.
+  Create a token in supply of ``maximum_supply`` with an ``issuer`` account.
+  If successful, a new entry in :ref:`stats <tutorials-token-table-stats>`
+  table for token symbol scope will be created. 
+  Transaction must be signed by the contract account itself.
 
 
-issue
--------------------------------------------
+  .. cpp:function:: ACTION issue(eosio::name to, eosio::asset quantity, string memo)
 
-.. cpp:function:: ACTION token::issue(eosio::name to, eosio::asset quantity, string memo)
-
-Issue ``quantity`` of tokens to account ``to``
-with an optional ``memo`` that accompanies the token issue transaction. 
-The token needs to be created in advance.
-Transaction must be signed by the ``issuer``.
+  Issue ``quantity`` of tokens to account ``to``
+  with an optional ``memo`` that accompanies the token issue transaction. 
+  The token needs to be created in advance.
+  Transaction must be signed by the ``issuer``.
 
 
-transfer
--------------------------------------------
+  .. cpp:function:: ACTION transfer(eosio::name from, eosio::name to, eosio::asset quantity, string memo)
 
-.. cpp:function:: ACTION token::transfer(eosio::name from, eosio::name to, eosio::asset quantity, string memo)
-
-Transfer ``quantity`` of tokens from account ``from`` to account ``to``,
-with an optional ``memo`` that accompanies the transfer transaction. 
-The token needs to be created in advance.
-Transaction must be signed by account ``from``.
-
-.. _tutorials-token-action-open:
-
-open
--------------------------------------------
-
-.. cpp:function:: ACTION token::open(eosio::name owner, eosio::symbol symbol, eosio::name ram_payer)
-
-Allows ``ram_payer`` to create an account ``owner`` with zero balance for
-token ``symbol`` at the expense of ``ram_payer``.
-Transaction must be signed by account ``ram_payer``.
+  Transfer ``quantity`` of tokens from account ``from`` to account ``to``,
+  with an optional ``memo`` that accompanies the transfer transaction. 
+  The token needs to be created in advance.
+  Transaction must be signed by account ``from``.
 
 
-close
--------------------------------------------
+  .. cpp:function:: ACTION open(eosio::name owner, eosio::symbol symbol, eosio::name ram_payer)
 
-.. cpp:function:: ACTION token::close(eosio::name owner, eosio::symbol symbol)
-
-This action is the opposite for :ref:`open <tutorials-token-action-open>`, 
-it closes the account ``owner`` for token ``symbol``.
+  Allows ``ram_payer`` to create an account ``owner`` with zero balance for
+  token ``symbol`` at the expense of ``ram_payer``.
+  Transaction must be signed by account ``ram_payer``.
 
 
-retire
--------------------------------------------
+  .. cpp:function:: ACTION close(eosio::name owner, eosio::symbol symbol)
 
-.. cpp:function:: ACTION token::retire(eosio::asset quantity, string memo)
+  This action is the opposite for :cpp:func:`open`, 
+  it closes the account ``owner`` for token ``symbol``.
 
-The opposite for :ref:`create <tutorials-token-action-create>` action.
-If all validations succeed, it debits the statstable.supply amount.
+
+  .. cpp:function:: ACTION retire(eosio::asset quantity, string memo)
+
+  The opposite of :cpp:func:`create`.
+  If all validations succeed, it debits the statstable.supply amount.
 
 
 -------------------------------------------

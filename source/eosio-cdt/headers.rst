@@ -45,7 +45,7 @@ symbol.hpp
 
 .. cpp:class:: eosio::symbol
 
-  Used to define a token's ``symbol_code`` and ``precision`` (digits after the decimal).
+  Used to define a token's :cpp:class:`symbol_code` and ``precision`` (digits after the decimal).
   
   Example:
 
@@ -93,7 +93,7 @@ asset.hpp
 
 .. cpp:class:: eosio::asset
 
-  The class ``asset`` is used to specify some amount of tokens. 
+  Used to specify some amount of tokens. 
   It consists of an ``amount`` property and a ``symbol`` property.
   For example, ``10.0000 EOS`` is an ``asset`` with 
   ``amount`` equals ``10 * 10^4`` and ``symbol`` equals ``4,EOS``. 
@@ -202,7 +202,7 @@ time.hpp
 
   .. cpp:function:: uint32_t sec_since_epoch()
 
-    Return ``this.utc_seconds``
+    Returns :cpp:var:`utc_seconds`
 
   .. cpp:var:: uint32_t utc_seconds
 

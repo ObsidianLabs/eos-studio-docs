@@ -42,6 +42,7 @@ token standards
   :hidden:
 
   quickstart
+  wallets
   standard
   contracts
   exchange

@@ -17,7 +17,7 @@ that could address a diverse range of digital item requirements.
 
 
 Multiple categorized tokens in one contract
--------------------------------------------
+===========================================
 
 In a world where digital goods will be a major commodity, being able 
 easily and efficiently manage large quantities of items is critical.
@@ -42,7 +42,7 @@ quickly and efficiently.
 
 
 Fungible, non-fungible, and semi-fungible
--------------------------------------------
+===========================================
 
 `Fungible tokens` refers to tokens which are interchangeable like EOS itself. 
 When tokens are fungible, each of their individual units are equivalent
@@ -78,14 +78,14 @@ others non-fungible.
   A diagram to demonstrate how NFT and FT fit in a category. Should have
   more details to explain how they are structured in dGoods standard.
 
-Fungible tokens are identified by ``symbol:category:name`` 
+Fungible tokens are identified by ``category:token_name`` 
 and NFTs have an extra token id associated. This allows for unprecedented 
 organization of tokens. It also enables wallets and dApps to surface tokens 
 by category or name, providing search and filtering functionality.
 
 
 Certificate of Authenticity
--------------------------------------------
+===========================================
 
 True ownership is at the heart of the new player-owned economy that’s 
 emerging from blockchain technology. With the certificate of authenticity, 
@@ -103,7 +103,7 @@ or rarity.
 
 
 Metadata Templates
--------------------------------------------
+===========================================
 
 Part of the dGoods standard involves specifying templates for metadata 
 depending upon the type of digital good you’re working with. If the token 
@@ -117,13 +117,16 @@ development community a flexible toolset to work with.
 
   some examples for templates
 
+
 Decentralized Exchange
--------------------------------------------
+===========================================
+
+.. _dgoods-standard-dex:
 
 One of the biggest features of dgoods is the built in exchange.
 
 Open Source
--------------------------------------------
+===========================================
 
 The dGoods standard is an open and free standard initially for the EOS 
 development community but is open for other blockchains to adopt. The 
