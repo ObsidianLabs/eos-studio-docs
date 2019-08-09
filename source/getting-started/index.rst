@@ -4,10 +4,10 @@ Getting Started
 
 EOS Studio comes with two versions:
 
-- :ref:`EOS Studio Web <getting-started-web>`
+- :doc:`EOS Studio Web <web>`
   is a web-based IDE
 
-- :ref:`EOS Studio Desktop <getting-started-desktop>` 
+- :doc:`EOS Studio Desktop <desktop>` 
   is a stand-alone desktop appliction, supporting 
   Mac OS, Windows and Linux.
 

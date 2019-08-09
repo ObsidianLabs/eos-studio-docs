@@ -42,6 +42,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
+    'sphinx.ext.autosectionlabel',
     'sphinx.ext.linkcode',
     'recommonmark'
 ]
@@ -202,6 +203,8 @@ def linkcode_resolve(domain, info):
     names = info['names'][0].split('::')
     if names[0] == 'eosio':
         return linkcode_resolve_eosio(names)
+    elif names[0] == 'dgoods':
+        return linkcode_resolve_dgoods(names)
     else:
         return None
 
@@ -210,7 +213,6 @@ def linkcode_resolve_eosio(names):
         return None
     
     github = "https://github.com/EOSIO/eosio.cdt/blob/v1.6.2/libraries"
-    print names
 
     if names[1] == 'name':
         return "%s/eosiolib/core/eosio/name.hpp#L35" % github
@@ -242,3 +244,49 @@ def linkcode_resolve_eosio(names):
         return "%s/eosiolib/core/eosio/time.hpp#L141" % github
     else:
         return None
+
+
+def linkcode_resolve_dgoods(names):
+    if (len(names) != 2):
+        return None
+    
+    github = "https://github.com/MythicalGames/dgoods/blob/v1.0"
+    # print names
+
+    if names[1] == 'setconfig':
+        return "%s/src/dgoods.cpp#L4" % github
+    elif names[1] == 'create':
+        return "%s/src/dgoods.cpp#L19" % github
+    elif names[1] == 'issue':
+        return "%s/src/dgoods.cpp#L88" % github
+    elif names[1] == 'burnnft':
+        return "%s/src/dgoods.cpp#L137" % github
+    elif names[1] == 'burnft':
+        return "%s/src/dgoods.cpp#L172" % github
+    elif names[1] == 'transfernft':
+        return "%s/src/dgoods.cpp#L196" % github
+    elif names[1] == 'transferft':
+        return "%s/src/dgoods.cpp#L215" % github
+    elif names[1] == 'listsalenft':
+        return "%s/src/dgoods.cpp#247" % github
+    elif names[1] == 'closesalenft':
+        return "%s/src/dgoods.cpp#L289" % github
+
+    elif names[1] == 'tokenconfigs':
+        return "%s/include/dgoods.hpp#97" % github
+    elif names[1] == 'dgoodstats':
+        return "%s/include/dgoods.hpp#L112" % github
+    elif names[1] == 'categoryinfo':
+        return "%s/include/dgoods.hpp#L104" % github
+    elif names[1] == 'dgood':
+        return "%s/include/dgoods.hpp#L131" % github
+    elif names[1] == 'accounts':
+        return "%s/include/dgoods.hpp#L147" % github
+    elif names[1] == 'lockednfts':
+        return "%s/include/dgoods.hpp#L78" % github
+    elif names[1] == 'asks':
+        return "%s/include/dgoods.hpp#L86" % github
+
+    else:
+        return None
+

@@ -2,15 +2,6 @@
 dGoods Standard
 ===========================================
 
-.. note::
-
-  This section will explain the dGoods standard in details.  
-  We referred the dGoods release Medium article but rewrote some parts.
-  
-  We will probably add more details about how the features are 
-  implemented in dGoods. Some figures and code snippets might
-  be helpful for better understanding.
-
 The digital goods landscape is as diverse as it gets, so 
 dGoods provide a flexible and comprehensive standard 
 that could address a diverse range of digital item requirements.
@@ -73,11 +64,6 @@ Since the dGoods standard has the benefit of defining sub-tokens within one
 contract, it gives developers the freedom to make some of them fungible and 
 others non-fungible.
 
-.. todo::
-
-  A diagram to demonstrate how NFT and FT fit in a category. Should have
-  more details to explain how they are structured in dGoods standard.
-
 Fungible tokens are identified by ``category:token_name`` 
 and NFTs have an extra token id associated. This allows for unprecedented 
 organization of tokens. It also enables wallets and dApps to surface tokens 
@@ -105,7 +91,7 @@ or rarity.
 Metadata Templates
 ===========================================
 
-Part of the dGoods standard involves specifying templates for metadata 
+Part of the dGoods standard involves specifying :doc:`templates for metadata <templates>`
 depending upon the type of digital good you’re working with. If the token 
 is for a game, coupon, ticket, music file, piece of art, etc., standard 
 templates can be created so that wallets will be able to render and display 
@@ -113,17 +99,11 @@ the relevant information, images, and even 3d objects. This allows for a
 wide array of digital asset types to be supported while providing the 
 development community a flexible toolset to work with.
 
-.. todo::
-
-  some examples for templates
-
 
 Decentralized Exchange
 ===========================================
 
-.. _dgoods-standard-dex:
-
-One of the biggest features of dgoods is the built in exchange.
+One of the biggest features of dgoods is the built-in exchange.
 
 Open Source
 ===========================================

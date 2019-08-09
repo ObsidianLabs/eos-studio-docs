@@ -1,5 +1,3 @@
-.. _contract-token:
-
 ===========================================
 eosio.token
 ===========================================
@@ -30,7 +28,7 @@ Actions
   .. cpp:function:: ACTION create(eosio::name issuer, eosio::asset maximum_supply)
 
   Create a token in supply of ``maximum_supply`` with an ``issuer`` account.
-  If successful, a new entry in :ref:`stats <tutorials-token-table-stats>`
+  If successful, a new entry in :cpp:var:`stat`
   table for token symbol scope will be created. 
   Transaction must be signed by the contract account itself.
 
@@ -74,12 +72,29 @@ Actions
 Tables
 -------------------------------------------
 
-.. _tutorials-token-table-stats:
+.. cpp:class:: token
 
-stats
--------------------------------------------
+  .. cpp:var:: TABLE stat
 
-Emphasis ``scope``
+    .. code-block:: cpp
 
-accounts
--------------------------------------------
+      // scope is token symbol
+      eosio::asset supply;
+      eosio::asset max_supply;
+      eosio::name issuer;
+
+      uint64_t primary_key()const { return supply.symbol.code().raw(); }
+
+    Emphasis ``scope``
+
+
+  .. cpp:var:: TABLE accounts
+
+    .. code-block:: cpp
+
+      // scope is owner
+      eosio::asset balance;
+      uint64_t primary_key()const { return balance.symbol.code().raw(); }
+
+    Emphasis ``scope``
+

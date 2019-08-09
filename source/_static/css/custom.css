@@ -1,5 +1,10 @@
 @import 'theme.css';
 
+.rst-content .highlighted {
+  display: inline;
+  padding: 0;
+}
+
 .rst-content a:not(.headerlink):hover {
   text-decoration: underline;
 }
@@ -65,4 +70,8 @@
 }
 .rst-content code.xref:hover {
   text-decoration: underline;
+}
+
+.rst-content .viewcode-link, .rst-content .viewcode-back {
+  padding-left: 28px;
 }

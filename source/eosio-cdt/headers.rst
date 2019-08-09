@@ -69,7 +69,7 @@ symbol.hpp
 .. cpp:class:: eosio::extended_symbol
 
   A type of token is created by the
-  :ref:`token::create <tutorials-token-action-create>` action.
+  :cpp:func:`token::create` action.
   The same contract account cannot ``create`` two types of tokens 
   with the same ``symbol``,
   but two different accounts deployed with the same ``eosio.token`` contract can

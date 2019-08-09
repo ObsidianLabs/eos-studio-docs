@@ -1,5 +1,3 @@
-.. _contract-dgoods:
-
 ===========================================
 dGoods
 ===========================================
@@ -8,9 +6,6 @@ dGoods
   :width: 60%
   :align: center
 
-.. note::
-
-  A brief introduction of dGoods
 
 `dGoods <https://github.com/MythicalGames/dgoods>`_ is an open source 
 and free standard for handling all types of 
@@ -28,14 +23,14 @@ for your dApps.
 Three most important properties of dGoods which differentiate from other 
 token standards
 
-- Hierarchical naming structure of ``category:name`` for each token or set of 
-  tokens, enabling filtering and organization of tokens
+- Hierarchical naming structure to enable filtering and organization of tokens and 
+  support fungible and non-fungible tokens (NFTs) in a single contract;
 
 - Focus on semi-fungible tokens - that is, tokens that are 1 of n with
-  a serial number or slightly different metadata
+  a serial number or slightly different metadata;
 
 - Open source metadata types and standardization for each type 
-  with localization, e.g. ``3dGameAsset``, ``Ticket``, etc
+  with localization, e.g. ``3dGameAsset``, ``Ticket``, etc.
 
 
 .. toctree::
@@ -46,3 +41,4 @@ token standards
   standard
   contracts
   exchange
+  templates

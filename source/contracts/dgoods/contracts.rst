@@ -4,8 +4,7 @@ Smart Contract (assets)
 
 We will now describe the set of actions 
 and table structures to implement the dGoods standard. In this section
-we focus on assets-related actions and tables, as well as some 
-example templates to define the metadata for digital assets. In the next
+we focus on assets-related actions and tables. In the next
 section we will talk about dGoods' built-in decentralized exchange.
 
 
@@ -31,7 +30,7 @@ Tables
     - ``symbol`` for the contract
     - ``standard`` and ``version`` that let wallets know what they need to support for this contract
     - ``category_name_id`` which is like a global id for ``category:token_name`` pairs;
-      the value will increment by one every time a new type of token is created
+      the value will increment by one every time :cpp:func:`create` is successfully executed
 
 
   .. cpp:var:: TABLE dgoodstats
@@ -44,23 +43,38 @@ Tables
       bool sellable;
       bool transferable;
       eosio::name issuer;
-      eosio::name rev_partner;
       eosio::name token_name;
       uint64_t category_name_id;
       eosio::asset max_supply;
       eosio::asset current_supply;
-      eosio::asset issued_supply; // keep track of unique id’s when tokens are burned as this never decreases
+      eosio::asset issued_supply;
+      eosio::name rev_partner;
       double rev_split;
       string base_uri;
 
       uint64_t primary_key() const { return token_name.value; }
 
-    Token info such as whether it is fungible, burnable, sellable or transferrable, 
-    and what the current and max supplies are. Info is written when a token 
-    is created.
-    The ``category`` is used as table ``scope`` and ``token_name``
+    Saves token info such as
+
+    - if the token is ``fungible``, ``burnable``, ``sellable`` and ``transferable``
+    - the ``issuer`` account who is authorized to issue the token
+    - ``category`` (as table scope) and ``token_name`` to determine token classfication;
+      the pair ``category:token_name`` must be unique
+    - ``category_name_id`` which is like a global id for ``category:token_name``
+    - ``max_supply``, ``current_supply``, ``issued_supply`` given as :cpp:class:`eosio::asset`;
+      for NFTs the precision must be integer; ``issued_supply`` is used to keep track of unique id’s
+      when tokens are burned as it never decreases
+    - ``rev_partner`` and ``rev_split`` which are used to determine how to split the income when 
+      the token is sold in the built-in :ref:`Decentralized Exchange`
+    - ``base_uri`` will be used together with ``relative_uri`` from table :cpp:var:`dgood`
+      to provide extra metadata for the token, 
+      usually as one of :doc:`metadata templates <templates>`
+
+    Info is written when a token is created.
+    The ``category`` is used as table scope and ``token_name``
     is the primary key, so it ensures each ``category:token_name`` pair is
     unique.
+
 
   .. cpp:var:: TABLE categoryinfo
 
@@ -93,6 +107,9 @@ Tables
     are not be saved in this table.
     Secondary indices are used to search by ``owner``.
 
+    - ``relative_uri`` will be used together with ``base_uri`` from table :cpp:var:`dgoodstats`
+      to provide extra metadata for the token, 
+      usually as one of :doc:`metadata templates <templates>`
 
   .. cpp:var:: TABLE accounts
 
@@ -107,8 +124,8 @@ Tables
       uint64_t primary_key() const { return category_name_id; }
       
     Holds account information. For fungible tokens ``amount`` is the token balance while
-    for NFTs it is the number of owned NFTs. Users need to query the ``dgood``
-    table to find information for each NFT they own.
+    for NFTs it is the number of owned NFTs. Users need to query table :cpp:var:`dgood`
+    to find information for each NFT they own.
 
 
 Actions
@@ -127,109 +144,48 @@ Actions
   .. cpp:function:: ACTION create(eosio::name issuer, eosio::name rev_partner, eosio::name category, eosio::name token_name, bool fungible, bool burnable, bool sellable, bool transferable, double rev_split, string base_uri, eosio::asset max_supply)
 
     Defines a type of token before any tokens can be issued. 
-    The action sets token properties such as
-
-    - the ``issuer`` account authorized to issue tokens
-    - ``category`` and ``token_name`` to determine token classfication;
-      the pair ``category:token_name`` must be unique
-    - if the token is ``fungible``, ``burnable``, ``sellable`` and ``transferable``
-    - ``max_supply`` given as an :cpp:class:`eosio::asset`; for NFTs the precision must be integer
-    - ``rev_partner`` and ``rev_split`` which are used to determine xxxx when 
-      the token is sold in the built-in exchange
+    See table :cpp:var:`dgoodstats` of how properties are defined.
 
 
   .. cpp:function:: ACTION issue(eosio::name to, eosio::name category, eosio::name token_name, eosio::asset quantity, string relative_uri, string memo)
 
     Mints a token and gives ownership to the ``to`` account. 
     The token ``category:token_name`` must be created first. 
-    Quantity will be set to 1 if non-fungible or semi-fungible,
-    otherwise quantity must match precision of ``max_supply``.
-    ``Metadata_type`` must be one of the accepted metadata type templates.
+    ``quantity`` must match the symbol and precision of ``max_supply``.
+    ``fixme`` For NFTs, can issue up to 100 at one time.
 
 
   .. cpp:function:: ACTION transferft(eosio::name from, eosio::name to, eosio::name category, eosio::name token_name, eosio::asset quantity, string memo)
 
-    Transfer fungible tokens of ``category:token_name``.
+    Transfer the fungible tokens ``category:token_name``.
+    Only applicable if the token is ``transferable``.
+    The ``quantity`` must match the symbol and precision of ``max_supply``.
 
 
   .. cpp:function:: ACTION transfernft(eosio::name from, eosio::name to, vector<uint64_t> dgood_ids, string memo)
 
-    Transfer non-fungible tokens.
+    Transfer non-fungible tokens. 
+    Only applicable	if the token is ``transferable`` and not be locked (see table :cpp:var:`lockednfts`).
+    ``dgood_ids`` are from table :cpp:var:`dgood`.
 
 
   .. cpp:function:: ACTION burnft(eosio::name owner, uint64_t category_name_id, eosio::asset quantity)
 
-    Destroys fungible tokens and frees the RAM if all are deleted from an account. 
-    ``quantity`` must match precision of ``max_supply``. Only owner may call Burn function 
-    and burnable must be true.
+    Destroys fungible tokens and frees the RAM if all tokens are deleted from the account. 
+    Only applicable if the token is ``burnable``. Only the owner may call this action. 
+    The ``quantity`` must match the symbol and precision of ``max_supply``.
+    The ``category_name_id`` is from table :cpp:var:`dgoodstats`.
 
 
   .. cpp:function:: ACTION burnnft(eosio::name owner, vector<uint64_t> dgood_ids)
 
-    Destroys specified tokens and frees the RAM. Only owner may call burn function, 
-    burnable must be true, and token must not be locked.
+    Destroys specified non-fungible tokens and frees the RAM.
+    Only applicable if the token is ``burnable`` and not be locked (see table :cpp:var:`lockednfts`). 
+    Only the owner may call this action. 
+    ``dgood_ids`` are from table :cpp:var:`dgood`.
 
 
   .. cpp:function:: ACTION pausexfer(bool pause)
 
     Pauses all transfers of all tokens. Only callable by the contract. 
     If pause is true, will pause. If pause is false will unpause transfers.
-
-
-.. _dgoods-contract-templates
-
-
-Metadata Templates
-===========================================
-
-In order for wallets or dApps to support various digital goods, 
-there need to be standards associated with the metadata. Our 
-approach is to define templates based on the type of good. The 
-following templates are candidates we have put forth, but this 
-is to be a collaborative exercise. We want to provide a repository 
-of templates that are agreed upon by the community. All metadata is 
-formatted as JSON objects specified from the template types.
-
-3dgameAsset
--------------------------------------------
-
-.. code-block:: js
-
-  {
-    // Required Fields
-    "type": string; "3dgameAsset"
-    "name": string; identifies the asset the token represents
-    "description": string; short description of the asset the token represents
-    "imageSmall": URI pointing to image resource size 150 x 150
-    "imageLarge": URI pointing to image resource size 1024 x 1024
-    "3drender": URI pointing to js webgl for rendering 3d object
-    "details": Key Value pairs to render in a detail view, could be things like {"strength": 5}
-    // Optional Fields
-    "authenticityImage": URI pointing to resource with mime type image representing certificate of authenticity
-  }
-
-2dgameAsset
--------------------------------------------
-
-.. code-block:: js
-
-  {
-    // Required Fields
-    "type": string; "2dgameAsset"
-    "name": string; identifies the asset the token represents
-    "description": string; short description of the asset the token represents
-    "imageSmall": URI pointing to image resource size 150 x 150
-    "imageLarge": URI pointing to image resource size 1024 x 1024
-    "details": Key Value pairs to render in a detail view, could be things like {"strength": 5}
-    // Optional Fields
-    "authenticityImage": URI pointing to resource with mime type image representing certificate of authenticity
-  }
-
-ticket
--------------------------------------------
-
-art
--------------------------------------------
-
-jewelry
--------------------------------------------

@@ -11,7 +11,6 @@ Local Network
 
 .. image:: network_manager.png
 
-.. _feature-network-eosio-manager:
 
 -------------------------------------------
 EOSIO Version Manager
