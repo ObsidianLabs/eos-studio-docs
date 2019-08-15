@@ -37,13 +37,13 @@ Tables
 
     .. code-block:: cpp
 
-      // scope is category, then token_name is unique
+      // scope is category
       bool fungible;
       bool burnable;
       bool sellable;
       bool transferable;
       eosio::name issuer;
-      eosio::name token_name;
+      eosio::name token_name; // primary key
       uint64_t category_name_id;
       eosio::asset max_supply;
       eosio::asset current_supply;
@@ -51,8 +51,6 @@ Tables
       eosio::name rev_partner;
       double rev_split;
       string base_uri;
-
-      uint64_t primary_key() const { return token_name.value; }
 
     Saves token info such as
 
@@ -81,10 +79,8 @@ Tables
     .. code-block:: cpp
 
       // scope is self
-      eosio::name category;
+      eosio::name category; // primary key
 
-      uint64_t primary_key() const { return category.value; }
-    
     Holds all category names for easy querying.
 
 
@@ -93,16 +89,13 @@ Tables
     .. code-block:: cpp
 
       // scope is self
-      uint64_t id;
+      uint64_t id; // primary key
       uint64_t serial_number;
-      eosio::name owner;
+      eosio::name owner; // secondary key
       eosio::name category;
       eosio::name token_name;
       std::optional<string> relative_uri;
 
-      uint64_t primary_key() const { return id; }
-      uint64_t get_owner() const { return owner.value; }
-    
     The global list for non and semi-fungible tokens. Fungible tokens 
     are not be saved in this table.
     Secondary indices are used to search by ``owner``.
@@ -116,13 +109,11 @@ Tables
     .. code-block:: cpp
 
       // scope is owner
-      uint64_t category_name_id;
+      uint64_t category_name_id; // primary key
       eosio::name category;
       eosio::name token_name;
       eosio::asset amount;
 
-      uint64_t primary_key() const { return category_name_id; }
-      
     Holds account information. For fungible tokens ``amount`` is the token balance while
     for NFTs it is the number of owned NFTs. Users need to query table :cpp:var:`dgood`
     to find information for each NFT they own.

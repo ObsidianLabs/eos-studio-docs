@@ -41,7 +41,7 @@ Tables
       vector<uint64_t> dgood_ids;
       eosio::name seller;
       eosio::asset amount;
-      time_point_sec expiration;
+      eosio::time_point_sec expiration;
 
       uint64_t primary_key() const { return batch_id; }
       uint64_t get_seller() const { return seller.value; }

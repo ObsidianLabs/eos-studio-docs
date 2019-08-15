@@ -103,7 +103,9 @@ development community a flexible toolset to work with.
 Decentralized Exchange
 ===========================================
 
-One of the biggest features of dgoods is the built-in exchange.
+.. todo::
+
+  One of the biggest features of dgoods is the built-in exchange.
 
 Open Source
 ===========================================

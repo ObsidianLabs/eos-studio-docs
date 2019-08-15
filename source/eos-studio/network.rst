@@ -40,14 +40,17 @@ Logs of Block Production
 
 You can toggle the button and hide ...
 
+Cloud-hosted Network
+===========================================
+
+This is a for-development testnet provided by dfuse.
+
 Remote Networks
 ===========================================
 
-EOS Studio now supports
+Other networks EOS Studio supports
 
 - The EOSIO Mainnet
-- Cloud-hosted network - This is a for-development testnet provided 
-  by dfuse for EOS Studio. 
 - Jungle 2.0 testnet
 - CryptoKylin testnet
 

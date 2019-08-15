@@ -12,15 +12,17 @@
   color: #2980B9;
 }
 
-.rst-content dl:not(.docutils) dl,
-.rst-content dl dl {
-  margin-top: 32px;
+.rst-content dl:not(.docutils) dl {
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+.rst-content dl:not(.docutils) dl dd {
+  margin-bottom: 32px;
+}
+.rst-content dl:not(.docutils) dl dd:empty {
   margin-bottom: 0;
 }
-.rst-content dl dl:first-child {
-  margin-top: 12px;
-}
-.rst-content dl ul li p {
+.rst-content dl:not(.docutils) ul li p {
   margin-bottom: 0 !important;
 }
 .rst-content dl:not(.docutils) dl dt {
@@ -32,6 +34,7 @@
   font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace;
   padding-left: 35px;
   text-indent: -29px;
+  margin-bottom: 8px;
 }
 .rst-content dl:not(.docutils) dt .reference.internal {
   color: #2980B9;
@@ -63,6 +66,10 @@
 
 .rst-content code.literal {
   /* color: #dc9201; */
+}
+
+.rst-content code.sig-name.descname {
+  /* color: #2980B9; */
 }
 
 .rst-content code.xref {

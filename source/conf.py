@@ -203,6 +203,8 @@ def linkcode_resolve(domain, info):
     names = info['names'][0].split('::')
     if names[0] == 'eosio':
         return linkcode_resolve_eosio(names)
+    elif names[0] == 'token':
+        return linkcode_resolve_eosio_token(names)
     elif names[0] == 'dgoods':
         return linkcode_resolve_dgoods(names)
     else:
@@ -246,6 +248,33 @@ def linkcode_resolve_eosio(names):
         return None
 
 
+def linkcode_resolve_eosio_token(names):
+    if (len(names) != 2):
+        return None
+    
+    github = "https://github.com/EOSIO/eosio.contracts/tree/release/1.7.x/contracts/eosio.token"
+
+    if names[1] == 'create':
+        return "%s/src/eosio.token.cpp#L5" % github
+    elif names[1] == 'issue':
+        return "%s/src/eosio.token.cpp#L27" % github
+    elif names[1] == 'transfer':
+        return "%s/src/eosio.token.cpp#L77" % github
+    elif names[1] == 'open':
+        return "%s/src/eosio.token.cpp#L129" % github
+    elif names[1] == 'close':
+        return "%s/src/eosio.token.cpp#L149" % github
+    elif names[1] == 'retire':
+        return "%s/src/eosio.token.cpp#L53" % github
+
+    elif names[1] == 'stat':
+        return "%s/include/eosio.token/eosio.token.hpp#L163" % github
+    elif names[1] == 'accounts':
+        return "%s/include/eosio.token/eosio.token.hpp#L157" % github
+    else:
+        return None
+
+
 def linkcode_resolve_dgoods(names):
     if (len(names) != 2):
         return None
@@ -273,7 +302,7 @@ def linkcode_resolve_dgoods(names):
         return "%s/src/dgoods.cpp#L289" % github
 
     elif names[1] == 'tokenconfigs':
-        return "%s/include/dgoods.hpp#97" % github
+        return "%s/include/dgoods.hpp#L97" % github
     elif names[1] == 'dgoodstats':
         return "%s/include/dgoods.hpp#L112" % github
     elif names[1] == 'categoryinfo':

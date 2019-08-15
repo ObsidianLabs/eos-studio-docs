@@ -9,7 +9,8 @@ and learn how to issue some digital assets. For those who only need to use dGood
 some basic scenarios, this section should be enough for you to understand some common practices of 
 dGoods.
 
-We will use EOS Studio Web and EOS Studio Cloud-hosted Network in this tutorial
+We will use :doc:`EOS Studio Web </getting-started/web>`
+and the :ref:`Cloud-hosted Network <Cloud-hosted Network>` in this tutorial
 so you don't need to set up an EOSIO development environment.
 The source code for dGoods smart contract is already on EOS Studio Web. 
 Open the project at https://app.eosstudio.io/mythicalgames/dgoods,
@@ -37,10 +38,10 @@ Initialization
 
 Each dGoods contract has a universal ``symbol`` to govern all digital assets created under it.
 The ``symbol`` can be any strings of capital letters up to 7 characters.
-To initialize a new dGoods contract, it's required to first execute the ``setconfig`` action 
+To initialize a new dGoods contract, it's required to first execute the :cpp:func:`setconfig` action 
 to set the ``symbol`` along with some other configs.
 Open ``diablo.dapp`` contract in EOS Studio's :doc:`Contract Inspector </eos-studio/contract>` and 
-execute the ``setconfig`` action with
+execute the :cpp:func:`setconfig` action with
 
 .. code-block:: js
 
@@ -82,7 +83,7 @@ To create the sword asset type, execute the :cpp:func:`create` action
   sellable: true // can be sold in the built-in DEX
   transferable: true // can be transfered
   rev_split: 0.05
-  base_uri: "https://dgoods.eosstudio.io/quickstart/weapons/sword/"
+  base_uri: "http://dgoods.eosstudio.io/quickstart/weapons/sword/"
   max_supply: "10000 SWORD"
 
 Here we created ``weapons:sword`` with max supply of 10000, which means 
@@ -105,7 +106,7 @@ We will use the :cpp:func:`create` action again to define an in-game currency.
   sellable: false
   transferable: true
   rev_split: 0
-  base_uri: "https://dgoods.eosstudio.io/quickstart/currencies/gold/"
+  base_uri: "http://dgoods.eosstudio.io/quickstart/currencies/gold/"
   max_supply: "1000000000.0000 GOLD"
 
 Each unit of ``GOLD`` will be identical and this type of asset is called *fungible tokens*.
@@ -129,19 +130,20 @@ using the :cpp:func:`issue` action.
   relative_uri: "master_sword"
   memo: "You justed picked the Master Sword!"
 
-dGoods standard allow you to provide extra information for the item, given by the 
-URI ``base_uri`` + ``relative_uri``. The standard also defined some :doc:`templates <templates>`
+dGoods standard allows you to provide some extra information for the item 
+returned by the URI ``base_uri`` + ``relative_uri``.
+The standard also defined some :doc:`templates <templates>`
 for the data format. For example, we are using ``2dgameAsset`` for our Master Sword.
 
 .. code-block:: js
-  :caption: Response of https://dgoods.eosstudio.io/quickstart/weapons/sword/master_sword 
+  :caption: Response of http://dgoods.eosstudio.io/quickstart/weapons/sword/master_sword 
 
   {
     "type": "2dgameAsset",
     "name": "Master Sword",
     "description": "Master Sword is",
-    "imageSmall": "https://dgoods.eosstudio.io/quickstart/weapons/sword/pic/master_sword_sm.jpg", // 150 x 150
-    "imageLarge": "https://dgoods.eosstudio.io/quickstart/weapons/sword/pic/master_sword_lg.jpg", // 1024 x 1024
+    "imageSmall": "http://dgoods.eosstudio.io/quickstart/weapons/sword/pic/master_sword_sm.jpg", // 150 x 150
+    "imageLarge": "http://dgoods.eosstudio.io/quickstart/weapons/sword/pic/master_sword_lg.jpg", // 1024 x 1024
     "details": {
       "attack": 30
     },
@@ -175,7 +177,7 @@ Let's explore what this data looks like on chain so far:
 ============  ============  ============  ============  ============  ============  ========================  ============  ========================  ========================  ============  ============  ========================================================================
 fungible      burnable      sellable      transferable  issuer        token_name    category_name_id          max_supply    current_supply            issued_supply             rev_partner   rev_split     base_uri
 ============  ============  ============  ============  ============  ============  ========================  ============  ========================  ========================  ============  ============  ========================================================================
-false         true          true          true          diablo.dapp   sword         0                         10000 SWORD   1 SWORD                   1 SWORD                   diablo.dapp   0.05          https://dgoods.eosstudio.io/quickstart/weapons/sword/
+false         true          true          true          diablo.dapp   sword         0                         10000 SWORD   1 SWORD                   1 SWORD                   diablo.dapp   0.05          http://dgoods.eosstudio.io/quickstart/weapons/sword/
 ============  ============  ============  ============  ============  ============  ========================  ============  ========================  ========================  ============  ============  ========================================================================
 
 
@@ -184,7 +186,7 @@ false         true          true          true          diablo.dapp   sword     
 ============  ============  ============  ============  ============  ============  ========================  ========================  ========================  ========================  ============  ============  ========================================================================
 fungible      burnable      sellable      transferable  issuer        token_name    category_name_id          max_supply                current_supply            issued_supply             rev_partner   rev_split     base_uri
 ============  ============  ============  ============  ============  ============  ========================  ========================  ========================  ========================  ============  ============  ========================================================================
-true          true          false         true          diablo.dapp   gold          1                         1000000000.0000 GOLD      100.0000 GOLD             100.0000 GOLD             diablo.dapp   0             https://dgoods.eosstudio.io/quickstart/currencies/gold/
+true          true          false         true          diablo.dapp   gold          1                         1000000000.0000 GOLD      100.0000 GOLD             100.0000 GOLD             diablo.dapp   0             http://dgoods.eosstudio.io/quickstart/currencies/gold/
 ============  ============  ============  ============  ============  ============  ========================  ========================  ========================  ========================  ============  ============  ========================================================================
 
 
@@ -218,12 +220,15 @@ The owner of NFTs can transfer them to another account using the :cpp:func:`tran
   // Execute action *transfernft* with parameters
   from: "demonhunter"
   to: "necromancer"
-  dgood_ids: [0, 1]
+  dgood_ids: [0]
   memo: "Take the weapons and fight with me."
 
-``dgood_id`` are coming from ``fixme``
+Notice that the parameter ``dgood_ids`` is an array which means you can transfer multiple items
+in a single action call. The id's are coming from the :cpp:var:`dgood` table and make sure you have 
+ownership of all assets being transfered.
 
-You can also sell the asset in the built-in :ref:`decentralized exchange <Decentralized Exchange>`.
+NFTs can also be sold in the built-in :ref:`decentralized exchange <Decentralized Exchange>`
+which we will talk about in later sections.
 
 To transfer fungible tokens, use :cpp:func:`transferft`
 
@@ -251,12 +256,22 @@ it using :cpp:func:`burnnft` (for NFTs) or :cpp:func:`burnft` (for fungible toke
   // Execute action *burnft* with parameters
   owner: "necromancer"
   dgood_ids: [0]
-  memo: "xxx xxx"
+  memo: "Destroy the sword"
 
 .. code-block:: js
 
   // Execute action *burft* with parameters
   owner: "necromancer"
-  category_name_id: "xxx" // how to find it?
-  memo: "xxx xxx"
+  category_name_id: "1"
+  quantity: "1.0000 GOLD"
 
+You can find the ``category_name_id`` either in the :cpp:var:`dgoodstats` table
+or the :cpp:var:`accounts` table.
+
+
+Next
+===========================================
+
+We have covered the process of creating, issuing, transfering and burning some
+digital assets. In the next setion, we will talk about how to look at your assets in 
+3rd-party wallets.
