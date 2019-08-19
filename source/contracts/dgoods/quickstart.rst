@@ -269,8 +269,7 @@ You can find the ``category_name_id`` either in the :cpp:var:`dgoodstats` table
 or the :cpp:var:`accounts` table.
 
 
-Next
-===========================================
+.. rubric:: Next Step
 
 We have covered the process of creating, issuing, transfering and burning some
 digital assets. In the next setion, we will talk about how to look at your assets in 

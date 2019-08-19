@@ -15,7 +15,7 @@ the contract account name.
 EOS Studio will automatically read the abi file in the account
 to check the contract based on the contract account you entered.
 
-The EOS Studio contract inspector has two parts: 
+The EOS Studio Contract Inspector has two parts: 
 
   1) a panel to execute actions on the left, and
   2) a panel to query table data on the right.

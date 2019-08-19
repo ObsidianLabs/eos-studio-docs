@@ -207,6 +207,8 @@ def linkcode_resolve(domain, info):
         return linkcode_resolve_eosio_token(names)
     elif names[0] == 'dgoods':
         return linkcode_resolve_dgoods(names)
+    elif names[0] == 'forum':
+        return linkcode_resolve_forum(names)
     else:
         return None
 
@@ -315,6 +317,42 @@ def linkcode_resolve_dgoods(names):
         return "%s/include/dgoods.hpp#L78" % github
     elif names[1] == 'asks':
         return "%s/include/dgoods.hpp#L86" % github
+
+    else:
+        return None
+
+
+
+def linkcode_resolve_forum(names):
+    if (len(names) != 2):
+        return None
+    
+    github = "https://github.com/eoscanada/eosio.forum/tree/master"
+    # print names
+
+    if names[1] == 'propose':
+        return "%s/src/forum.cpp#L11" % github
+    elif names[1] == 'expire':
+        return "%s/src/forum.cpp#L43" % github
+    elif names[1] == 'clnproposal':
+        return "%s/src/forum.cpp#L111" % github
+    elif names[1] == 'vote':
+        return "%s/src/forum.cpp#L58" % github
+    elif names[1] == 'unvote':
+        return "%s/src/forum.cpp#L80" % github
+    elif names[1] == 'post':
+        return "%s/src/forum.cpp#L139" % github
+    elif names[1] == 'unpost':
+        return "%s/src/forum.cpp#L167" % github
+    elif names[1] == 'status':
+        return "%s/src/forum.cpp#L174" % github
+
+    elif names[1] == 'proposals':
+        return "%s/include/forum.hpp#L87" % github
+    elif names[1] == 'vote':
+        return "%s/include/forum.hpp#L106" % github
+    elif names[1] == 'status':
+        return "%s/include/forum.hpp#L124" % github
 
     else:
         return None

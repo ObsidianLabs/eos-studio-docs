@@ -2,11 +2,12 @@
 eosio.forum
 ===========================================
 
-.. note::
 
-  A brief introduction of eosio.forum
-
-The purpose of ``eosio.forum`` is to support the EOS Referendum system 
+`eosio.forum <https://github.com/eoscanada/eosio.forum>`_
+is a smart contract built by 
+`EOS Canada <https://www.eoscanada.com>`_
+to support the 
+`EOS Referendum system <https://medium.com/@eosnationbp/the-fate-of-eos-is-in-the-hands-of-token-holders-3d345147ef6>`_
 by storing proposals and their related votes in-RAM in the blockchain's 
 state.
 

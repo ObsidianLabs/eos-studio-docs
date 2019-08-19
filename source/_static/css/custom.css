@@ -72,6 +72,10 @@
   /* color: #2980B9; */
 }
 
+.rst-content dl table.highlighttable {
+  margin-bottom: 0 !important;
+}
+
 .rst-content code.xref {
   color: #2980B9;
 }

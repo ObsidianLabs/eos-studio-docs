@@ -17,7 +17,7 @@ The key features include
 
 - EOSIO customized code editor
 - Built-in EOSIO.CDT
-- Interactive contract inspector
+- Interactive :doc:`Contract Inspector </eos-studio/contract>`
 - EOSIO version manager.
 
 EOS Studio was first launched in Febuary 2019 and it 
@@ -40,10 +40,13 @@ as well as providing a with examples.
   :caption: Introduction
 
   getting-started/index
+
+..
   eosio-fundamentals/index
   advanced/index
 
-.. toctree::
+..
+  .. toctree::
   :maxdepth: 2
   :caption: EOS Studio Features
 
@@ -59,9 +62,10 @@ as well as providing a with examples.
   :caption: Sample Smart Contracts
 
   contracts/eosio-token
-  contracts/elemental-battles
-  contracts/dgoods/index
   contracts/eosio-forum/index
+
+.. contracts/dgoods/index
+  contracts/elemental-battles
 
 .. toctree::
   :maxdepth: 2

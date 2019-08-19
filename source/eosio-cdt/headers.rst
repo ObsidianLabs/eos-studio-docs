@@ -159,7 +159,7 @@ time.hpp
 
   .. cpp:var:: int64_t _count
 
-    The value used in serilization
+    The value used in serialization
 
 .. cpp:function:: inline microseconds eosio::milliseconds( int64_t ms )
 .. cpp:function:: inline microseconds eosio::seconds( int64_t s )
@@ -180,7 +180,7 @@ time.hpp
 
   .. cpp:var:: microseconds elapsed
     
-    The value used in serilization
+    The value used in serialization
 
 
 
@@ -206,6 +206,6 @@ time.hpp
 
   .. cpp:var:: uint32_t utc_seconds
 
-    The value used in serilization
+    The value used in serialization
 
 .. cpp:class:: eosio::block_timestamp
