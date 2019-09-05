@@ -1,18 +1,17 @@
 ===========================================
-Account System
+Accounts
 ===========================================
 
-For Bitcoin or Ethereum, `addresses` are the individuals 
-in blockchain transactions. For example, tokens are
-transfered from one address to another, and each address has
-its own token balance. 
-Different from them, EOSIO uses `accounts` as the basic unit 
-to store tokens and act as an individual on the blockchain.
+Blockchains like Bitcoin or Ethereum use `addresses` to represent 
+individuals in transactions. Tokens are transfered from one address 
+to another, and each address has its own token balance. 
+However, EOSIO-based blockchain use `accounts` as the basic unit 
+to store tokens and act as individuals in blockchain transactions.
 
 Account Name
 ===========================================
 
-An account can have a human readable name so it will be easy to remember.
+An EOSIO account can have a human readable name so it will be easy to remember.
 The account name is a string of max length 12 consists of 
 small letters a-z, digits 1-5 and dot.
 
@@ -25,12 +24,15 @@ small letters a-z, digits 1-5 and dot.
 Create an Account
 ===========================================
 
-Accounts need to be created by another account.
+An EOSIO account can be created by another existing account. 
+Creating an account will require some EOS tokens to purchase the 
+:doc:`resources <resource>`
+needed to store the account's basic information.
 
-Accounts are created, and it is not free.
+..
 
-Permissions
-===========================================
+  Permissions
+  ===========================================
 
-An account has a few permission keys (a private key and a public key)
-Using permission key to sign a transaction issued by an account.
+.. An account has a few permission keys (a private key and a public key)
+    Using permission key to sign a transaction issued by an account.

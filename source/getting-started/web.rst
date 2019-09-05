@@ -2,19 +2,19 @@
 EOS Studio Web
 ===========================================
 
-EOS Studio Web is a powerful in-browser IDE designed for the complete 
-development process of EOSIO smart contracts. The web IDE will handle 
-everything from cloud-based contract compilation to cloud-hosted networks. 
-No need to download, install, and configure the EOSIO development environment 
-anymore. Now, anyone can start a blockchain project within seconds.
+..
+  EOS Studio Web is a powerful in-browser IDE designed for the complete 
+  development process of EOSIO smart contracts. The web IDE will handle 
+  everything from cloud-based contract compilation to cloud-hosted networks. 
+  No need to download, install, and configure the EOSIO development environment 
+  anymore. Now, anyone can start a blockchain project within seconds.
 
-In addition, many experienced blockchain teams will now share their open 
-source smart contracts and tutorial resources on EOS Studio Web to help new 
-users get started. From today, smart contract development is redefined. 
-Open your browser and enjoy a new blockchain development experience!
+  In addition, many experienced blockchain teams will now share their open 
+  source smart contracts and tutorial resources on EOS Studio Web to help new 
+  users get started. From today, smart contract development is redefined. 
+  Open your browser and enjoy a new blockchain development experience!
 
-
-Open EOS Studio Web at https://app.eossstudio.io
+EOS Studio Web is available at https://app.eossstudio.io.
 
 Log in with GitHub
 ===========================================
@@ -27,7 +27,7 @@ Create a new project
 
 press the button and create the project
 
-Cloud-based CDT
+Cloud CDT
 ===========================================
 
 use cdt to build the project, generating ``.wasm`` and ``.abi`` files

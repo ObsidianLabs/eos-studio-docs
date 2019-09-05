@@ -74,13 +74,13 @@ On EOS Mainnet
 ===========================================
 
 After many weeks of testing, the ``eosio.forum`` contract was ready for the release.
-EOS Canada proposed that this contract 
+EOS Canada proposed that this contract be
 `deployed to a system contract account <https://github.com/eoscanada/proposals/blob/master/deployforum.md>`_ 
 ``eosio.forum`` so that all users know that this is the official referendum contract 
 that they can have faith in. The smart contract would also be fully under the control of the 
 Block Producers collectively, and thus of the EOS mainnet itself.
 
-The EOS community has approved this proposal in January 2019, so the ``eosio.forum``
+The EOS community approved this proposal in January 2019, so the ``eosio.forum``
 has formally become the official referendum system on the EOS mainnet.
 Since then, EOS token holders have submitted numerous proposals on this contract 
 to improve the mainnet governance and promote the development of the EOS mainnet.
@@ -124,12 +124,12 @@ On Sidechains
 
 The same smart contract has also been adopted in other EOSIO sidechains.
 For example, `BOSCore <https://boscore.io/en/index.html>`_ deployed
-its own version of 
+its own version of the 
 `forum contract <https://github.com/boscore/referendum/tree/master/contracts/eosio.forum>`_
 to support its referendum and Worker Proposal System (WPS).
-They also use the referendum system to launch the
+They also used the referendum system to launch the
 `BOS Development Incentive Program <https://github.com/boscore/Documentation/blob/master/Referendum_WPS/BOS%20Ecosystem%20Program(Referendum%20%26%20WPS).md>`_
-to incentive technical contributions to its ecosystem.
+to incentivize technical contributions to its ecosystem.
 
 .. todo::
 
@@ -141,7 +141,7 @@ Other Applications
 The ``eosio.forum`` can be used in many other scenarios.
 An interesting example is that the EOS community was able to use ``eosio.forum`` 
 to create an on-chain Reddit substitute called `Novusphere <https://novusphere.io/>`_.
-The forum contract is like the backend server for Novusphere, and is has 
+The forum contract is like the backend server for Novusphere, and it has 
 another web user interface for users to easily create or read posts.
 You can go to their website at https://discussions.app, and 
 compare the posts with ``eosio.forum``'s 

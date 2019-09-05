@@ -8,6 +8,6 @@ Some basics for EOSIO
   :maxdepth: 1
 
   account
+  resource
   dapp
   smart-contract
-  resource

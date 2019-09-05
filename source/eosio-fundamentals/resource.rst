@@ -1,5 +1,5 @@
 ===========================================
-Resource Model
+Resources
 ===========================================
 
 The EOSIO blockchain defines three types of resources to
@@ -9,8 +9,10 @@ compensate the usage of the network:
 - NET for network bandwidth
 - RAM for data storage
 
-Since these three resources are all limited, the EOSIO network
-designed models to distribute them and ...
+..
+
+  Since these three resources are all limited, the EOSIO network
+  designed models to distribute them and ...
 
 CPU
 ===========================================

@@ -3,7 +3,7 @@ Quickstart
 ===========================================
 
 In the first section we will
-demonstrate the basic workflow of create a proposal
+demonstrate the basic workflow of creating a proposal
 and how to cast a vote on it. This workflow will be divided into 4 stages: 
 `proposal`, `voting`, `freeze`, and `clearing the RAM`.
 
@@ -21,7 +21,7 @@ Setups
   https://app.eosstudio.io/dfuseio/eosio.forum and click the `fork` button
   to make your own copy of the project.
 
-- Edit a waiting time from 3 days to 5 minutes so that we won't 
+- Edit the waiting time from 3 days to 5 minutes so that we won't 
   need to wait that long in this demo. 
   Open the file ``include/forum.hpp``, go to line 70 and change the value of
   ``FREEZE_PERIOD_IN_SECONDS`` to ``300``. The use of this value will be
@@ -40,9 +40,9 @@ Stage 1: Proposal
 ===========================================
 
 Anybody with a valid EOS account 
-can create a proposal to the community. Such operation will consume some RAM
-to save the content of the proposal, so before we create a new one, let's
-open the account ``proposer`` and take a note of its current RAM usage.
+can create a proposal to the community. Calling this operation will consume some RAM
+to save the content of the proposal. Before we create a new proposal, let's
+open the account ``proposer`` and take note of its current RAM usage.
 Then, go to EOS Studio's :doc:`Contract Inspector </eos-studio/contract>` 
 and execute the :cpp:func:`propose` action
 
@@ -63,13 +63,13 @@ contains a ``title`` (up to 1024 chars) and a ``proposal_json`` in the
 format of
 `Proposal JSON Structure Guidelines <https://github.com/eoscanada/eosio.forum#proposal-json-structure-guidelines>`_.
 Every proposal also needs to have an expiration time ``expires_at``,
-which should be a point between now and 6 months later.
+which should be a point between now and 6 months in the future.
 We will explain how it is used in :ref:`Stage 3 <Stage 3: Freeze>`.
 
 If you check ``proposer``'s RAM usage now, you should see it has increased
 by about 1 KB if you have the same parameters as provided above. Requirement 
-of some RAM can prevent spammings  
-so important issues can be discussed and voted on. Once a proposal has
+of some RAM can prevent spam  
+so that important issues can be discussed and voted on. Once a proposal has
 finished its entire lifecycle, ``eosio.forum`` allow 
 you to safely remove the proposal and free up used RAM (:ref:`Stage 4 <Stage 4: Clean up>`).
 
@@ -131,15 +131,16 @@ id             proposal_name  voter          vote           vote_json      updat
 2              usesys         voter3         255                           2019-09...
 =============  =============  =============  =============  =============  =============
 
-Similar as above, voters need to pay RAM to save their own votes. If you compare
-voters' RAM usage you can see it has increased a little bit
-after executing the :cpp:func:`vote` action. These RAM will also be refunded to each 
+Similar to proposers, voters need to pay RAM to save their own votes. 
+If you view the voters' RAM usage, you will see it has increased by 430 bytes
+after executing the :cpp:func:`vote` action. This RAM will also be refunded to each 
 voter when the proposal is removed in :ref:`Stage 4 <Stage 4: Clean up>`.
 
-A voter can change vote anytime by calling :cpp:func:`vote` again 
+Voters can change their votes at anytime by calling :cpp:func:`vote` again 
 with a different ``vote`` value to override the old one. 
-S(he) can also `remove` the vote via the :cpp:func:`unvote` action, which would
-completely remove his/her vote data in the :cpp:var:`vote` table and refund RAM immediately.
+They can also `remove` the vote via the :cpp:func:`unvote` action, which would
+completely remove their vote data in the :cpp:var:`vote` table and refund 
+their RAM immediately.
 
 
 Stage 3: Freeze
@@ -205,5 +206,5 @@ Once all votes are removed on a proposal, the proposal itself will then be remov
 
 Now, if you look at accounts ``proposer`` and ``voter1`` etc, their RAM usage should 
 go back to the value before participating in the proposal and voting. 
-Therfore, on completion of a proposal all used memory will be returned 
+Therefore, on completion of a proposal all used memory will be returned 
 without a memory leak.

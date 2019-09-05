@@ -56,7 +56,7 @@ actions to operate a proposal.
 
     This action allows the ``proposer`` to manually expire his/her
     proposal and end the voting immediately. 
-    This is done by modify the ``expires_at`` field to the current time.
+    This is done by modifying the ``expires_at`` field to the current time.
 
     .. code-block:: cpp
       :caption: forum.cpp
@@ -82,7 +82,7 @@ actions to operate a proposal.
       bool can_be_cleaned_up() const { return current_time_point_sec() > (expires_at + FREEZE_PERIOD_IN_SECONDS);  }
 
     The action :cpp:func:`clnproposal` will clean up all votes related to a proposal.
-    It will works iteratively by removing as many as ``max_count`` votes,
+    It works iteratively by removing as many as ``max_count`` votes,
     and can be executed multiple times until all votes are removed.
 
     .. code-block:: cpp
@@ -115,7 +115,7 @@ actions to operate a proposal.
         proposal_table.erase(itr);
       }
 
-    Such procedure effectively clears all the RAM consumed for a proposal 
+    This effectively clears all the RAM consumed for a proposal 
     and all its votes.
     It's safe to allow anybody to call :cpp:func:`clnproposal` since the action will 
     only accept an expired proposal that has passed the freeze period, which means it
@@ -153,7 +153,7 @@ and :cpp:func:`unvote` actions.
       eosio::time_point_sec updated_at;
 
     For a non-expired proposal, any accounts can use the :cpp:func:`vote`
-    action to publish a vote. It will consume a little bit RAM for the voter
+    action to publish a vote. It will consume a little bit of RAM from the voter (430 bytes)
     to save the vote info in table :cpp:var:`vote`.
     
     The meaning of the vote is represented by 
@@ -166,14 +166,14 @@ and :cpp:func:`unvote` actions.
 
     In table :cpp:var:`vote`,
     the primary key ``id`` is generated automatically. Secondary keys are
-    created for fields ``proposal_name`` and ``voter`` to support seaching
+    created for fields ``proposal_name`` and ``voter`` to support searching
     by proposal or voter.
     The field ``vote_json`` is designed to provide extra information for a vote,
-    but has not been used widely in currect referendum practice.
+    such as a comment explaining the thought behind the vote.
 
     The voter can execute the :cpp:func:`vote` action again to change his/her vote,
     or call the :cpp:func:`unvote` action to delete his/her vote in table :cpp:var:`vote`.
-    Remove the current active vote effectively reclaiming the stored RAM of the vote. 
+    Removing the current active vote reclaims the stored RAM of the vote. 
     Of course, the vote will not count anymore.
 
     The :cpp:func:`vote` and :cpp:func:`unvote` actions will first check
