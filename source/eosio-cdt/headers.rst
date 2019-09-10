@@ -108,7 +108,7 @@ name.hpp
 
 .. cpp:struct:: eosio::name
   
-  Mainly used to represent an eosio account name.
+  Mainly used to represent an EOSIO account name.
   Name string can only have small letters a-z, digits 1-5 or dot, and max 12 characters.
   The name is saved as a ``uint64_t``.
 

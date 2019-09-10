@@ -6,7 +6,7 @@ Introduction
 ===========================================
 
 The ``eosio.token`` contract defines the structures and actions that allow users 
-to create, issue, and manage tokens on eosio based blockchains.
+to create, issue, and manage tokens on EOSIO based blockchains.
 The core token ``EOS`` of the EOSIO mainnet are issued under 
 the account ``eosio.token`` using this smart contract.
 
