@@ -2,105 +2,122 @@
 dGoods in Wallets
 ===========================================
 
-As a open sourced standard, dGoods provides a protocol that xxx
-xxx for wallets to support dGoods standard.
-`TokenPocket <https://www.tokenpocket.pro>`_
-is a xxxx that already supports the dGoods standard.
-
-We will continue from the previous section
+As a open sourced standard, dGoods provides a protocol that 3rd-party
+wallet can implement to provide the features of dGoods. Users will be
+able to visualize the digital assets issued under the standard and 
+make transactions for them. In this section, we will show how to do
+that using `TokenPocket <https://www.tokenpocket.pro>`_,
+one of the first wallets support dGoods.
+We will continue from the previous section, so make sure you already
+followed it and issued some digital assets.
 
 Preparations
 ===========================================
 
-**1. Connect to EOS Studio's Cloud-hosted network**
+-------------------------------------------
+1. Enable dGoods in developer mode
+-------------------------------------------
 
-  - Open TokenPocket and go to Me -> Settings -> Nodes Setting
-  - Add a custom node under the Custom section: ``https://eos-studio.api.dfuse.dev``
+- Open TokenPocket and go to *Me -> About Us*.
+- Tap the TokenPocket icon 8 times and turn on the developer mode.
 
-.. image:: tp-node.png
-  :width: 30%
-  :align: center
+.. image:: images/tp-dev-aboutus.png
+  :width: 32%
+.. image:: images/tp-dev-agreement.png
+  :width: 32%
 
-**2. Enable Developer Mode**
+- The *Developer Mode* option will appear at the bottom. 
+  Go inside and turn on the *dGoods* option.
 
-  - Open TokenPocket and go to Me -> About Us, 连续点击 Token Pocket 图标 8 次，
-    开发者模式的对话框弹出，勾选并点击 Understood
-  .. image:: tp-dev-aboutus.png
-    :width: 30%
-  .. image:: tp-dev-agreement.png
-    :width: 30%
+.. image:: images/tp-dev-list.png
+  :width: 32%
+.. image:: images/tp-dev-dgoods.png
+  :width: 32%
 
-  - 列表中新增 Developer Mode，点击进入 Developer Mode 并开启 dGoods 选项
-  .. image:: tp-dev-list.png
-    :width: 30%
-  .. image:: tp-dev-dgoods.png
-    :width: 30%
 
-**3. Import accounts**
+-------------------------------------------------
+2. Connect to EOS Studio's Cloud-hosted network
+-------------------------------------------------
 
-  - Open the :ref:`keypair manager <Keypair Manager>` in EOS Studio 
-    and export the private keys you used to create ``demonhunter`` and ``necromancer`` 
-    (or accounts you used to own dGoods).
+- Go to *Me -> Settings -> Nodes Setting*.
+- Under the custom section, add the API endpoint ``https://eos-studio.api.dfuse.dev``.
 
-  - Open TokenPocket and go to Assets, click I have an account.
-  - 选择 Private Key 导入
-  - 将 EOS Studio 中获取的 private key 粘贴进最上方输入框
-  - 按下方提示依次填入密码等，在 Account(Developer Mode) 中输入你的账号名
-  - 点击 Start Importing
+.. image:: images/tp-node.png
+  :width: 32%
 
-  .. image:: tp-assets-no-account.png
-    :width: 30%
-  .. image:: tp-assets-add-list.png
-    :width: 30%
-  .. image:: tp-assets-add-details.png
-    :width: 30%
+-------------------------------------------
+3. Import accounts
+-------------------------------------------
 
-**4. Add dGoods contract**
+- Open the :ref:`Keypair Manager <Keypair Manager>` in EOS Studio 
+  and export the private keys you used to create ``demonhunter`` and ``necromancer`` 
+  (or accounts you used).
+- Open TokenPocket and go to *Assets*, and select *I have an account -> Private Key*.
+- Paste the private key exported from EOS Studio, enter a password to protect your private key
+  and remember to enter the account name in *Account(Developer Mode)*.
+- Click *Start Importing* to finish importing your accounts to TokenPocket.
 
-  - Go back to Assets tab 你会发现账户中已经有一些 EOS token 了
-  .. image:: tp-assets-main.png
-    :width: 30%
-    :align: center
+.. image:: images/tp-assets-no-account.png
+  :width: 32%
+.. image:: images/tp-assets-add-list.png
+  :width: 32%
+.. image:: images/tp-assets-add-details.png
+  :width: 32%
 
-  - 选择 Collectibles ，目前列表为空，点击最右边的加号
-  - 在弹出的窗口中填入你的 contract name 并 confirm
-  - Collectibles 底下会新增 dGoods 的 contract 了
+-------------------------------------------
+4. Add dGoods contract
+-------------------------------------------
 
-  .. image:: tp-assets-collectibles-empty.png
-    :width: 30%
-  .. image:: tp-assets-collectibles-add.png
-    :width: 30%
-  .. image:: tp-assets-collectibles-list.png
-    :width: 30%
+Go back to *Assets* tab to find the account you just imported. You should see it already
+has some EOS tokens.
 
-View digital assets in wallets
+.. image:: images/tp-assets-main.png
+  :width: 32%
+
+The dGoods assets you own may be issued under different contracts, which represents different
+games or applications. You need to manually add the contract that issued your digital assets. 
+
+- Go to the *Collectibles* which is still empty now. Click the *plus icon* at the right.
+- Enter the name of the contract that issued your dGoods assets, and click *Confirm*.
+- An item with the contract name will appear in the collectible list. Click on it and you will
+  be able to view digital assets you own under the contract.
+
+.. image:: images/tp-assets-collectibles-empty.png
+  :width: 32%
+.. image:: images/tp-assets-collectibles-add.png
+  :width: 32%
+.. image:: images/tp-assets-collectibles-list.png
+  :width: 32%
+
+View digital assets
 ===========================================
-现在我们可以查看我们账号底下的 dGoods 资产了
+
+Now we are ready to look at our dGoods assets in TokenPocket.
 
 **Non-fungible tokens**
 
-.. image:: tp-nft-list.png
-  :width: 30%
-.. image:: tp-nft-details.png
-  :width: 30%
+.. image:: images/tp-nft-list.png
+  :width: 32%
+.. image:: images/tp-nft-details.png
+  :width: 32%
 
 **Fungible tokens**
 
-.. image:: tp-ft-list.png
-  :width: 30%
-.. image:: tp-ft-details.png
-  :width: 30%
+.. image:: images/tp-ft-list.png
+  :width: 32%
+.. image:: images/tp-ft-details.png
+  :width: 32%
 
-Make Transfers
+Make transfers
 ===========================================
 
-- 点击进入某个 NFT 详情
-- 点击详情底下的 Transfer
-- 在 Payee 中填写接收人，点击 Confirm 后输入密码
+- Select the NFT you want to transfer, and click the *Transfer* button.
+- Enter payee's account name and click *Confirm*. 
+- Enter the password you used when importing the private key to authorize the transaction.
 
-.. image:: tp-nft-details.png
-  :width: 30%
-.. image:: tp-transfer.png
-  :width: 30%
-.. image:: tp-transfer-password.png
-  :width: 30%
+.. image:: images/tp-nft-details.png
+  :width: 32%
+.. image:: images/tp-transfer.png
+  :width: 32%
+.. image:: images/tp-transfer-password.png
+  :width: 32%
