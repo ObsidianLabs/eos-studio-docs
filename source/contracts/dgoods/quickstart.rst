@@ -76,17 +76,17 @@ To create the sword asset type, execute the :cpp:func:`create` action
   // Execute action *create* with parameters
   issuer: "diablo.dapp"
   rev_partner: "diablo.dapp"
-  category: "weapons"
-  token_name: "sword"
+  category: "sword"
+  token_name: "ingeom"
   fungible: false
   burnable: true // can be burned (destroyed)
   sellable: true // can be sold in the built-in DEX
   transferable: true // can be transfered
   rev_split: 0.05
-  base_uri: "http://dgoods.eosstudio.io/quickstart/weapons/sword/"
-  max_supply: "10000 SWORD"
+  base_uri: "http://dgoods.eosstudio.io/quickstart/assets/"
+  max_supply: "10000 DIABLO"
 
-Here we created ``weapons:sword`` with max supply of 10000, which means 
+Here we created ``sword:ingeom`` with max supply of 10000, which means 
 there will be at maximum 10000 swords for all players in the game.
 The ``base_uri`` will be used later to provide metadata for each sword.
 Properties ``rev_partner`` and ``rev_split`` are used when the asset is sold in the 
@@ -106,8 +106,8 @@ We will use the :cpp:func:`create` action again to define an in-game currency.
   sellable: false
   transferable: true
   rev_split: 0
-  base_uri: "http://dgoods.eosstudio.io/quickstart/currencies/gold/"
-  max_supply: "1000000000.0000 GOLD"
+  base_uri: "http://dgoods.eosstudio.io/quickstart/assets/5d790aa1582a3b6f477f098a"
+  max_supply: "1000000000.0000 DIABLO"
 
 Each unit of ``GOLD`` will be identical and this type of asset is called *fungible tokens*.
 Note that for both fungible and non-fungible tokens, ``max_supply`` is always of type ``asset`` 
@@ -124,11 +124,11 @@ using the :cpp:func:`issue` action.
 
   // Execute action *issue* with parameters
   to: "demonhunter"
-  category: "weapons"
-  token_name: "sword"
-  quantity: "1 SWORD"
-  relative_uri: "master_sword"
-  memo: "You justed picked the Master Sword!"
+  category: "sword"
+  token_name: "ingeom"
+  quantity: "1 DIABLO"
+  relative_uri: "5d64ea4dd3295f7921dbe320"
+  memo: "You justed picked the In-geom Sword!"
 
 dGoods standard allows you to provide some extra information for the item 
 returned by the URI ``base_uri`` + ``relative_uri``.
@@ -136,16 +136,16 @@ The standard also defined some :doc:`templates <templates>`
 for the data format. For example, we are using ``2dgameAsset`` for our Master Sword.
 
 .. code-block:: js
-  :caption: Response of http://dgoods.eosstudio.io/quickstart/weapons/sword/master_sword 
+  :caption: Response of http://dgoods.eosstudio.io/quickstart/assets/5d64ea4dd3295f7921dbe320 
 
   {
     "type": "2dgameAsset",
-    "name": "Master Sword",
-    "description": "Master Sword is",
-    "imageSmall": "http://dgoods.eosstudio.io/quickstart/weapons/sword/pic/master_sword_sm.jpg", // 150 x 150
-    "imageLarge": "http://dgoods.eosstudio.io/quickstart/weapons/sword/pic/master_sword_lg.jpg", // 1024 x 1024
+    "name": "In-geom",
+    "description": "Carried by the kings of Xiansai in antiquity, this sword was said to harness the speed and lethality of four tiger spirits. One king claimed to have “exorcised” a thousand demons from their hapless victims, using only this blade.",
+    "imageSmall": "http://ok.166.net/cain-corner/diablo3db/49511/cn/items/p2_sword_norm_unique_01_icon.png", // 150 x 150
+    "imageLarge": "http://ok.166.net/cain-corner/diablo3db/49511/cn/items/p2_sword_norm_unique_01_icon.png", // 1024 x 1024
     "details": {
-      "attack": 30
+      "level": 80
     },
     "authenticityImage": ""
   }
@@ -165,19 +165,19 @@ We can also use :cpp:func:`issue` action to issue some fungible tokens
   to: "demonhunter"
   category: "currencies"
   token_name: "gold"
-  quantity: "100.0000 GOLD"
+  quantity: "100.0000 DIABLO"
   relative_uri: "" // will not be used for fungible tokens
   memo: "Take this to start your advanture."
 
 Let's explore what this data looks like on chain so far:
 
 
-- Table ``dgoodstats`` with scope ``weapons``
+- Table ``dgoodstats`` with scope ``sword``
 
 ============  ============  ============  ============  ============  ============  ========================  ============  ========================  ========================  ============  ============  ========================================================================
 fungible      burnable      sellable      transferable  issuer        token_name    category_name_id          max_supply    current_supply            issued_supply             rev_partner   rev_split     base_uri
 ============  ============  ============  ============  ============  ============  ========================  ============  ========================  ========================  ============  ============  ========================================================================
-false         true          true          true          diablo.dapp   sword         0                         10000 SWORD   1 SWORD                   1 SWORD                   diablo.dapp   0.05          http://dgoods.eosstudio.io/quickstart/weapons/sword/
+false         true          true          true          diablo.dapp   ingeom        0                         10000 SWORD   1 SWORD                   1 SWORD                   diablo.dapp   0.05          http://dgoods.eosstudio.io/quickstart/assets/
 ============  ============  ============  ============  ============  ============  ========================  ============  ========================  ========================  ============  ============  ========================================================================
 
 
@@ -186,17 +186,17 @@ false         true          true          true          diablo.dapp   sword     
 ============  ============  ============  ============  ============  ============  ========================  ========================  ========================  ========================  ============  ============  ========================================================================
 fungible      burnable      sellable      transferable  issuer        token_name    category_name_id          max_supply                current_supply            issued_supply             rev_partner   rev_split     base_uri
 ============  ============  ============  ============  ============  ============  ========================  ========================  ========================  ========================  ============  ============  ========================================================================
-true          true          false         true          diablo.dapp   gold          1                         1000000000.0000 GOLD      100.0000 GOLD             100.0000 GOLD             diablo.dapp   0             http://dgoods.eosstudio.io/quickstart/currencies/gold/
+true          true          false         true          diablo.dapp   gold          1                         1000000000.0000 GOLD      100.0000 GOLD             100.0000 GOLD             diablo.dapp   0             http://dgoods.eosstudio.io/quickstart/assets/5d790aa1582a3b6f477f098a
 ============  ============  ============  ============  ============  ============  ========================  ========================  ========================  ========================  ============  ============  ========================================================================
 
 
 - Table ``dgood`` with scope ``diablo.dapp``
 
-============  ========================  ============  ============  ============  ============
+============  ========================  ============  ============  ============  ========================
 id            serial_number             owner         category      token_name    relative_uri
-============  ========================  ============  ============  ============  ============
-true          true                      demonhunter   weapons       sword         master_sword
-============  ========================  ============  ============  ============  ============
+============  ========================  ============  ============  ============  ========================
+0             1                         demonhunter   sword         ingeom        5d64ea4dd3295f7921dbe320
+============  ========================  ============  ============  ============  ========================
 
 
 - Table ``accounts`` with scope ``demonhunter``
@@ -204,8 +204,8 @@ true          true                      demonhunter   weapons       sword       
 ========================  ============  ============  ========================
 category_name_id          category      token_name    amount
 ========================  ============  ============  ========================
-0                         weapons       sword         1 SWORD
-1                         currencies    gold          100.0000 GOLD
+0                         sword         ingeom        1 DIABLO
+1                         currencies    gold          100.0000 DIABLO
 ========================  ============  ============  ========================
 
 
@@ -239,8 +239,8 @@ To transfer fungible tokens, use :cpp:func:`transferft`
   to: "necromancer"
   category: "currencies"
   token_name: "gold"
-  quantity: "10.0000 GOLD"
-  memo: "Take the sword and fight with me."
+  quantity: "10.0000 DIABLO"
+  memo: "Take the money."
 
 Fungible tokens cannot be sold in the built-in exchange.
 
@@ -253,17 +253,17 @@ it using :cpp:func:`burnnft` (for NFTs) or :cpp:func:`burnft` (for fungible toke
 
 .. code-block:: js
 
-  // Execute action *burnft* with parameters
+  // Execute action *burnnft* with parameters
   owner: "necromancer"
   dgood_ids: [0]
   memo: "Destroy the sword"
 
 .. code-block:: js
 
-  // Execute action *burft* with parameters
+  // Execute action *burnft* with parameters
   owner: "necromancer"
   category_name_id: "1"
-  quantity: "1.0000 GOLD"
+  quantity: "1.0000 DIABLO"
 
 You can find the ``category_name_id`` either in the :cpp:var:`dgoodstats` table
 or the :cpp:var:`accounts` table.
