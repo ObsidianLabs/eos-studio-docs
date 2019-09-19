@@ -21,18 +21,27 @@ small letters a-z, digits 1-5 and dot.
 
   Its value is a ``uint64_t`` interger
 
+
 Create an Account
 ===========================================
 
-An EOSIO account can be created by another existing account. 
+A new EOSIO account needs to be created by another existing account. 
 Creating an account will require some EOS tokens to purchase the 
 :doc:`resources <resource>`
-needed to store the account's basic information.
+needed to store the account's basic information, such as its own name and 
+token balance.
 
-..
 
-  Permissions
-  ===========================================
+Permissions
+===========================================
 
-.. An account has a few permission keys (a private key and a public key)
-    Using permission key to sign a transaction issued by an account.
+A special feature EOSIO offers is that an account can process 
+multiple levels of permissions, each of which has unequal authorities 
+to approve different sets of transactions.  
+Such design can provide greater security for EOSIO blockchains
+because users can set up and use a low-privilege permission in daily transactions.
+Losing this permission wouldn't cause too much damage because it can only
+perform limited transactions, and users can use a high-privilege permission 
+to recover the lost one.
+
+.. Every EOS account has two native named permissions (owner and active).

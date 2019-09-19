@@ -9,32 +9,34 @@ compensate the usage of the network:
 - NET for network bandwidth
 - RAM for data storage
 
-..
 
-  Since these three resources are all limited, the EOSIO network
-  designed models to distribute them and ...
-
-CPU
+CPU -- Computation time
 ===========================================
 
-
-When an account calls any contract, it is calculated and consumes CPU. 
-A certain amount of EOS needs to be mortgaged in exchange for CPU usage rights.
+Any transaction posted to the blockchain network, either 
+a token transfer or an execution of smart contract actions, 
+needs to consume some CPU time to be properly processed
+and packed into blocks.
+The total amount of CPU time is limited by the harware,
+so a certain amount of EOS needs to be *staked* in exchange for CPU usage rights.
 The network will prorate the CPU time that each account can use based 
-on the total amount of CPUs collateralized on all accounts.  This time
-Represents the total CPU length that can be used in 24 hours. 
-The more CPUs an account needs to use, the more it needs to
+on the total amount of CPUs collateralized on all accounts.
+This time represents the total CPU length that can be used in 24 hours. 
 
-Delegated EOS can be refunded. It takes 72 hours.
+Staked EOS in exchange for CPU can be refunded if some computation time
+will not be used in the future.
 
-NET
+so that transactions tenically free.
+It takes 72 hours.
+
+NET -- Network bandwidth
 ===========================================
 
 NET's distribution mechanism is the same as the CPU, 
 but also through the mortgage method.
 To allocate the use of network bandwidth.
 
-RAM
+RAM -- Memory usage
 ===========================================
 
 The total amount of storage space on the chain is limited, 

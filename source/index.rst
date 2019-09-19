@@ -57,8 +57,8 @@ Table of Contents
 
   contracts/eosio-token
   .. contracts/elemental-battles
-  contracts/eosio-forum/index
-  contracts/dgoods/index
+  .. contracts/eosio-forum/index
+  .. contracts/dgoods/index
 
 .. toctree::
   :maxdepth: 2
