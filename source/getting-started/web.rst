@@ -14,7 +14,7 @@ EOS Studio Web
   users get started. From today, smart contract development is redefined. 
   Open your browser and enjoy a new blockchain development experience!
 
-EOS Studio Web is available at https://app.eossstudio.io.
+EOS Studio Web is available at https://app.eosstudio.io
 
 Log in with GitHub
 ===========================================
